@@ -7,6 +7,10 @@
       "RelativeMoniker": "D:0:0:{304677EC-2942-4D84-93EB-9DC356129689}|TakipAPI\\TakipAPI.csproj|solutionrelative:takipapi\\controllers\\belgecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{56B51961-599C-447E-8827-AC3567735CE5}|Application\\Application.csproj|c:\\users\\begumtasci\\desktop\\staj takip uygulamas\u0131 api\\application\\interfaces\\istajservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{56B51961-599C-447E-8827-AC3567735CE5}|Application\\Application.csproj|solutionrelative:application\\interfaces\\istajservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{304677EC-2942-4D84-93EB-9DC356129689}|TakipAPI\\TakipAPI.csproj|c:\\users\\begumtasci\\desktop\\staj takip uygulamas\u0131 api\\takipapi\\controllers\\paudisiogrencicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{304677EC-2942-4D84-93EB-9DC356129689}|TakipAPI\\TakipAPI.csproj|solutionrelative:takipapi\\controllers\\paudisiogrencicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -70,11 +74,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "IStajService.cs",
+              "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Application\\Interfaces\\IStajService.cs",
+              "RelativeDocumentMoniker": "Application\\Interfaces\\IStajService.cs",
+              "ToolTip": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Application\\Interfaces\\IStajService.cs",
+              "RelativeToolTip": "Application\\Interfaces\\IStajService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T13:16:56.541Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "PauDisiOgrenciController.cs",
               "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\TakipAPI\\Controllers\\PauDisiOgrenciController.cs",
               "RelativeDocumentMoniker": "TakipAPI\\Controllers\\PauDisiOgrenciController.cs",
@@ -82,8 +99,7 @@
               "RelativeToolTip": "TakipAPI\\Controllers\\PauDisiOgrenciController.cs",
               "ViewState": "AgIAAFsAAAAAAAAAAAAkwCoAAAAsAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T12:10:58.495Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-20T12:10:58.495Z"
             },
             {
               "$type": "Document",
@@ -93,14 +109,14 @@
               "RelativeDocumentMoniker": "TakipAPI\\Controllers\\BelgeController.cs",
               "ToolTip": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\TakipAPI\\Controllers\\BelgeController.cs",
               "RelativeToolTip": "TakipAPI\\Controllers\\BelgeController.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABEAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-20T12:09:35.746Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Staj Takip Uygulamas\u0131 Api\\appsettings.json",
               "RelativeDocumentMoniker": "Staj Takip Uygulamas\u0131 Api\\appsettings.json",
@@ -108,12 +124,11 @@
               "RelativeToolTip": "Staj Takip Uygulamas\u0131 Api\\appsettings.json",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-08-20T12:05:22.78Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-20T12:05:22.78Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "SmtpEmailSender.cs",
               "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Persistence\\Services\\SmtpEmailSender.cs",
               "RelativeDocumentMoniker": "Persistence\\Services\\SmtpEmailSender.cs",
@@ -121,12 +136,11 @@
               "RelativeToolTip": "Persistence\\Services\\SmtpEmailSender.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T12:04:31.762Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-20T12:04:31.762Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "EmailOptions.cs",
               "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Persistence\\Options\\EmailOptions.cs",
               "RelativeDocumentMoniker": "Persistence\\Options\\EmailOptions.cs",
@@ -134,12 +148,11 @@
               "RelativeToolTip": "Persistence\\Options\\EmailOptions.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T12:04:07.297Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-20T12:04:07.297Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 3,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Staj Takip Uygulamas\u0131 Api\\Program.cs",
               "RelativeDocumentMoniker": "Staj Takip Uygulamas\u0131 Api\\Program.cs",
@@ -147,12 +160,11 @@
               "RelativeToolTip": "Staj Takip Uygulamas\u0131 Api\\Program.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAA8AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T11:54:26.028Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-20T11:54:26.028Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "IEmailSender.cs",
               "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Application\\Interfaces\\IEmailSender.cs",
               "RelativeDocumentMoniker": "Application\\Interfaces\\IEmailSender.cs",
@@ -160,12 +172,11 @@
               "RelativeToolTip": "Application\\Interfaces\\IEmailSender.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T12:03:54.659Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-20T12:03:54.659Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "BelgeService.cs",
               "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Persistence\\Services\\BelgeService.cs",
               "RelativeDocumentMoniker": "Persistence\\Services\\BelgeService.cs",
@@ -173,12 +184,11 @@
               "RelativeToolTip": "Persistence\\Services\\BelgeService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAAtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T11:56:50.541Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-20T11:56:50.541Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "FileSystemFileStorage.cs",
               "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Persistence\\Services\\FileSystemFileStorage.cs",
               "RelativeDocumentMoniker": "Persistence\\Services\\FileSystemFileStorage.cs",
@@ -186,12 +196,11 @@
               "RelativeToolTip": "Persistence\\Services\\FileSystemFileStorage.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T11:55:56.331Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-20T11:55:56.331Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "StajyerService.cs",
               "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Persistence\\Services\\StajyerService.cs",
               "RelativeDocumentMoniker": "Persistence\\Services\\StajyerService.cs",
@@ -199,12 +208,11 @@
               "RelativeToolTip": "Persistence\\Services\\StajyerService.cs",
               "ViewState": "AgIAAFoAAAAAAAAAAAAQwIEAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T11:53:26.942Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-20T11:53:26.942Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "IStajyerService.cs",
               "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Application\\Interfaces\\IStajyerService.cs",
               "RelativeDocumentMoniker": "Application\\Interfaces\\IStajyerService.cs",
@@ -212,12 +220,11 @@
               "RelativeToolTip": "Application\\Interfaces\\IStajyerService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T11:53:07.486Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-20T11:53:07.486Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "StajyerUpdateDto.cs",
               "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Domain\\Entities\\StajyerUpdateDto.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\StajyerUpdateDto.cs",
@@ -225,12 +232,11 @@
               "RelativeToolTip": "Domain\\Entities\\StajyerUpdateDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T11:52:47.373Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-20T11:52:47.373Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "StajyerCreateDto.cs",
               "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Domain\\Entities\\StajyerCreateDto.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\StajyerCreateDto.cs",
@@ -238,12 +244,11 @@
               "RelativeToolTip": "Domain\\Entities\\StajyerCreateDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T11:52:31.217Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-20T11:52:31.217Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "StajyerDto.cs",
               "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Domain\\Entities\\StajyerDto.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\StajyerDto.cs",
@@ -251,12 +256,11 @@
               "RelativeToolTip": "Domain\\Entities\\StajyerDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABoAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T11:46:16.172Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-20T11:46:16.172Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "Stajyer.cs",
               "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Domain\\Entities\\Stajyer.cs",
               "RelativeDocumentMoniker": "Domain\\Entities\\Stajyer.cs",
@@ -264,8 +268,7 @@
               "RelativeToolTip": "Domain\\Entities\\Stajyer.cs",
               "ViewState": "AgIAAAsAAAAAAAAAAAAYwCQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-08-20T11:45:06.066Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-08-20T11:45:06.066Z"
             }
           ]
         }

@@ -5,7 +5,7 @@ using StajTakipUygulaması.Services.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace StajTakipUygulaması.Services.Implementations
+namespace Infrastructure.Services
 {
     public class StajService : IStajService
     {

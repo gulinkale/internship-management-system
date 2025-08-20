@@ -4,6 +4,5 @@ C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\TakipAPI\obj\Debug\net8.0
 C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\TakipAPI\obj\Debug\net8.0\TakipAPI.AssemblyInfoInputs.cache
 C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\TakipAPI\obj\Debug\net8.0\TakipAPI.AssemblyInfo.cs
 C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\TakipAPI\obj\Debug\net8.0\TakipAPI.csproj.CoreCompileInputs.cache
-C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\TakipAPI\obj\Debug\net8.0\TakipAPI.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\TakipAPI\obj\Debug\net8.0\TakipAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\TakipAPI\obj\Debug\net8.0\TakipAPI.sourcelink.json
