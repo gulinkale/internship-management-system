@@ -1,0 +1,191 @@
+@using StajTakipUygulaması.Models
+@model StajTakipUygulaması.Models.Basvuru
+
+@{
+    ViewBag.Title = "Başvuru Detayı";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- SOL BLOK -->
+        <div class="col-md-6 bg-white p-4 rounded border">
+            <h4 class="mb-3">Başvuru Sahibi Öğrenci Bilgileri</h4>
+
+            @{
+                var foto = Model.BasvuruBelgeleri?
+                    .FirstOrDefault(x => (x.BelgeTipi?.Ad ?? x.BelgeAdı) == "Fotoğraf");
+            }
+
+            <div class="bg-light border rounded p-3 mb-3">
+                <div class="card-body">
+                    <h6 class="card-title mb-3">Kişisel Bilgiler</h6>
+
+                    <div class="row g-3 align-items-start">
+                        <!-- SOL: metinler -->
+                        <div class="col">
+                            <p class="mb-1"><strong>Ad Soyad:</strong> @Model.Ad @Model.Soyad</p>
+                            <p class="mb-1"><strong>Cinsiyet:</strong> @Model.Cinsiyet</p>
+                            <p class="mb-1"><strong>TCKN:</strong> @Model.TCKimlikNo</p>
+                            <p class="mb-0">
+                                <strong>Doğum Tarihi:</strong>
+                                @(Model.DogumTarihi == default(DateTime) 
+                                    ? "-" 
+                                    : Model.DogumTarihi.ToString("dd.MM.yyyy"))
+                            </p>
+                        </div>
+
+                        <!-- SAĞ: foto -->
+                        <div class="col-auto ms-auto">
+                            @if (foto != null && !string.IsNullOrWhiteSpace(foto.Yolu))
+                            {
+                                <img src="@foto.Yolu"
+                                     alt="Fotoğraf"
+                                     class="img-thumbnail"
+                                     style="width:120px;height:120px;object-fit:cover;" />
+                            }
+                            else
+                            {
+                                <div class="d-flex align-items-center justify-content-center bg-white border rounded"
+                                     style="width:120px;height:120px;">
+                                    <span class="text-muted small">Fotoğraf yok</span>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 🎓 Eğitim Bilgileri -->
+            <div class="bg-light border p-3 mb-3">
+                <h6>Eğitim Bilgileri</h6>
+                <p><strong>Üniversite:</strong> @Model.Universite</p>
+                <p><strong>Fakülte / Enstitü:</strong> @Model.Fakulte</p>
+                <p><strong>Bölüm / Program:</strong> @Model.Bolum</p>
+                <p><strong>Sınıf:</strong> @Model.Sinif</p>
+                <p>
+                    <strong>Başlama Yılı:</strong>
+                    @(
+                        Model.BaslamaYili is DateTime dt ? dt.ToShortDateString()
+                        : Model.BaslamaYili.ToString()
+                    )
+                </p>
+                <p><strong>Öğrenci No:</strong> @Model.OgrenciNo</p>
+            </div>
+
+            <!-- ☎️ İletişim Bilgileri -->
+            <div class="bg-light border p-3 mb-3">
+                <h6>İletişim Bilgileri</h6>
+                <p><strong>Telefon:</strong> @Model.TelNo</p>
+                <p><strong>Email:</strong> @Model.Email</p>
+                <p><strong>Adres:</strong> @Model.Adres</p>
+            </div>
+
+            <!-- İşlemler -->
+            <div class="d-flex gap-2">
+                @if (Model.Durum == BasvuruDurumu.Reddedildi)
+                {
+                    <!-- REDDEDİLEN → BEKLEMEYE AL (POST) -->
+                    <form asp-controller="BasvuruDegerlendir"
+                          asp-action="BeklemeyeAl"
+                          method="post"
+                          class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@Model.ID" />
+                        <button type="submit" class="btn btn-warning">Beklemeye Al</button>
+                    </form>
+
+                    <a class="btn btn-secondary"
+                       asp-action="Index"
+                       asp-route-durum="@(BasvuruDurumu.Beklemede)">Geri</a>
+                }
+                else
+                {
+                    <!-- KABUL (GET ise mevcut halin kalsın; istersen POST'a çevirebilirsin) -->
+                    <a class="btn btn-success"
+                       asp-controller="BasvuruDegerlendir"
+                       asp-action="KabulEt"
+                       asp-route-id="@Model.ID">Kabul Et</a>
+
+                    <!-- REDDET (POST) -->
+                    <form asp-controller="BasvuruDegerlendir"
+                          asp-action="Reddet"
+                          method="post"
+                          class="d-inline"
+                          onsubmit="return confirm('Bu başvuruyu reddetmek istediğinize emin misiniz?');">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@Model.ID" />
+                        <button type="submit" class="btn btn-outline-danger">Reddet</button>
+                    </form>
+
+                    <a class="btn btn-secondary"
+                       asp-action="Index"
+                       asp-route-durum="@(BasvuruDurumu.Beklemede)">Geri</a>
+                }
+            </div>
+        </div>
+
+        <!-- SAĞ BLOK: 📄 Belge Önizleme -->
+        <div class="col-md-6">
+            <div class="bg-white p-4 rounded border mb-3">
+                <h5 class="mb-3">Başvuru Belgeleri</h5>
+
+                <table class="table table-bordered table-sm">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Belge Tipi</th>
+                            <th>Durum</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @{
+                        var tipler = (ViewBag.BelgeTipleri as List<StajTakipUygulaması.Models.BelgeTipi> ?? new())
+                                     .Take(10);
+                        foreach (var tip in tipler)
+                        {
+                            var belge = Model.BasvuruBelgeleri?.FirstOrDefault(x => x.BelgeTipiID == tip.ID);
+                            <tr>
+                                <td>@tip.Ad</td>
+                                <td>
+                                    @if (belge != null && !string.IsNullOrWhiteSpace(belge.Yolu))
+                                    {
+                                        <a href="#" onclick="gosterBelge('@belge.Yolu'); return false;">Görüntüle</a>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-danger">Yüklenmedi</span>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    }
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="belgePreviewContainer" style="display:none; height: 600px; border: 1px solid #ccc;">
+                <div class="d-flex justify-content-between align-items-center bg-secondary text-white px-2 py-1">
+                    <span>Belge Önizleme</span>
+                    <button class="btn btn-sm btn-light" onclick="kapatBelge()">Kapat</button>
+                </div>
+                <iframe id="belgePreviewFrame" style="width:100%; height:100%;" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function gosterBelge(yol) {
+            const container = document.getElementById("belgePreviewContainer");
+            const iframe = document.getElementById("belgePreviewFrame");
+            iframe.src = yol;
+            container.style.display = "block";
+        }
+        function kapatBelge() {
+            const container = document.getElementById("belgePreviewContainer");
+            const iframe = document.getElementById("belgePreviewFrame");
+            iframe.src = "";
+            container.style.display = "none";
+        }
+    </script>
+}

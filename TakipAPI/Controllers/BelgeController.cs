@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using StajTakipUygulamasi.Application.Interfaces;
 using StajTakipUygulaması.Data;
 using StajTakipUygulaması.Models;
 using System.IO;

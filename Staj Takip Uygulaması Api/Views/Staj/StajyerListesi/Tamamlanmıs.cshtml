@@ -1,0 +1,48 @@
+@model IEnumerable<StajTakipUygulaması.Models.Staj>
+
+@{
+    ViewBag.Title = "Aktif Staj Listesi";
+}
+
+<div class="container bg-white p-4 rounded border">
+    <h4 class="mb-3">Tamamlanmış Stajyer Listesi</h4>
+
+    <table class="table table-bordered table-striped table-sm">
+        <thead class="table-light">
+            <tr>
+                <th>NO</th>
+                <th>AD-SOYAD</th>
+                <th>STAJ TÜRÜ</th>
+                <th>DEPARTMAN</th>
+                <th>SORUMLU</th>
+                <th>BAŞLAMA / BİTİŞ TARİHLERİ</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null && Model.Any())
+            {
+                var no = 1;
+                foreach (var staj in Model)
+                {
+                    <tr>
+                        <td>@no</td>
+                        <td>
+                            <a asp-controller="Staj" asp-action="Details" asp-route-id="@staj.ID">
+                                @(staj.Stajyer.Ad + " " + staj.Stajyer.Soyad)
+                            </a>
+                        </td>
+                        <td>@staj.StajTuru?.Ad</td>
+                        <td>@staj.Departman</td>
+                        <td>@staj.SorumluID</td>
+                        <td>@staj.BaslamaTarihi.ToString("dd.MM.yyyy") - @staj.BitisTarihi.ToString("dd.MM.yyyy")</td>
+                    </tr>
+                    no++;
+                }
+            }
+            else
+            {
+                <tr><td colspan="7" class="text-center">Kayıt bulunamadı.</td></tr>
+            }
+        </tbody>
+    </table>
+</div>

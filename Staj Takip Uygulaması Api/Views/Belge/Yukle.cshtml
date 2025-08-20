@@ -1,0 +1,51 @@
+@model StajTakipUygulaması.Models.Belge
+@{
+    ViewBag.Title = "Belge Yükle";
+
+    // İptal’de nereye dönülecek?
+    var backUrl = ViewBag.ReturnUrl as string;
+    if (string.IsNullOrWhiteSpace(backUrl))
+        backUrl = Context.Request.Headers["Referer"].ToString();
+    if (string.IsNullOrWhiteSpace(backUrl))
+        backUrl = Url.Action("Index", "Home");
+}
+
+<div class="container mt-4">
+    <h4>Belge Yükle - @ViewBag.BelgeTipAd</h4>
+    <hr />
+
+    @if (TempData["Hata"] != null)
+    {
+        <div class="alert alert-danger">@TempData["Hata"]</div>
+    }
+    @if (TempData["OK"] != null)
+    {
+        <div class="alert alert-success">@TempData["OK"]</div>
+    }
+
+    <form asp-action="Yukle" asp-controller="Belge" method="post" enctype="multipart/form-data">
+        @Html.AntiForgeryToken()
+        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+        <!-- Kimlikler -->
+        <input asp-for="StajID" type="hidden" />
+        <input asp-for="BelgeTipiID" type="hidden" />
+        <input type="hidden" name="returnUrl" value="@backUrl" />
+
+        <div class="mb-3">
+            <label asp-for="Açıklama" class="form-label">Açıklama</label>
+            <textarea asp-for="Açıklama" class="form-control" rows="3" placeholder="(İsteğe bağlı) Bu belge hakkında not yazın..."></textarea>
+            <span asp-validation-for="Açıklama" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="dosya" class="form-label">Belge Dosyası</label>
+            <input type="file" name="dosya" id="dosya" class="form-control" required />
+        </div>
+
+        <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-success">Yükle</button>
+            <a href="@backUrl" class="btn btn-secondary">İptal</a>
+        </div>
+    </form>
+</div>

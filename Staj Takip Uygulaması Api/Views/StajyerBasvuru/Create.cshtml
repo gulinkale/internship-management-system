@@ -1,0 +1,182 @@
+@model StajTakipUygulaması.Models.OgrenciViewModel
+@using StajTakipUygulaması.Models
+
+@{
+    ViewBag.Title = "Yeni Öğrenci Kaydı";
+}
+
+<!-- ✅ Kayıt Başarılı Mesajı -->
+@if (ViewBag.Mesaj != null)
+{
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        @ViewBag.Mesaj
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Kapat"></button>
+    </div>
+}
+
+<form asp-controller="StajyerBasvuru" asp-action="Create" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    <div class="container bg-white border rounded p-4">
+        <h5 class="mb-4">PAÜ Öğrencisi Kaydı</h5>
+
+        <!-- Kişisel ve İletişim Bilgileri -->
+        <div class="row mb-4">
+            <!-- Kişisel Bilgiler -->
+            <div class="col-md-6">
+                <div class="bg-light border p-3">
+                    <h6>Kişisel Bilgiler</h6>
+                    <div class="mb-2">
+                        <label asp-for="Stajyer.Ad" class="form-label"></label>
+                        <input asp-for="Stajyer.Ad" class="form-control form-control-sm" />
+                        <span asp-validation-for="Stajyer.Ad" class="text-danger"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label asp-for="Stajyer.Soyad" class="form-label"></label>
+                        <input asp-for="Stajyer.Soyad" class="form-control form-control-sm" />
+                        <span asp-validation-for="Stajyer.Soyad" class="text-danger"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label asp-for="Stajyer.TCKimlikNo" class="form-label"></label>
+                        <input asp-for="Stajyer.TCKimlikNo" class="form-control form-control-sm" />
+                        <span asp-validation-for="Stajyer.TCKimlikNo" class="text-danger"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label asp-for="Stajyer.DogumTarihi" class="form-label"></label>
+                        <input asp-for="Stajyer.DogumTarihi" type="date" class="form-control form-control-sm" />
+                        <span asp-validation-for="Stajyer.DogumTarihi" class="text-danger"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label asp-for="Stajyer.Cinsiyet" class="form-label"></label>
+                        <select asp-for="Stajyer.Cinsiyet" class="form-select form-select-sm">
+                            <option value="">-- Cinsiyet Seçiniz --</option>
+                            <option value="Erkek">Erkek</option>
+                            <option value="Kadın">Kadın</option>
+                        </select>
+                        <span asp-validation-for="Stajyer.Cinsiyet" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- İletişim Bilgileri -->
+            <div class="col-md-6">
+                <div class="bg-light border p-3">
+                    <h6>İletişim Bilgileri</h6>
+                    <div class="mb-2">
+                        <label asp-for="Stajyer.TelNo" class="form-label"></label>
+                        <input asp-for="Stajyer.TelNo" class="form-control form-control-sm" />
+                        <span asp-validation-for="Stajyer.TelNo" class="text-danger"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label asp-for="Stajyer.Email" class="form-label"></label>
+                        <input asp-for="Stajyer.Email" class="form-control form-control-sm" />
+                        <span asp-validation-for="Stajyer.Email" class="text-danger"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label asp-for="Stajyer.Adres" class="form-label"></label>
+                        <input asp-for="Stajyer.Adres" class="form-control form-control-sm" />
+                        <span asp-validation-for="Stajyer.Adres" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Eğitim ve Staj Bilgileri -->
+        <div class="row mb-4">
+            <!-- Eğitim Bilgileri -->
+            <div class="col-md-6">
+                <div class="bg-light border p-3">
+                    <h6>Eğitim Bilgileri</h6>
+                    <div class="mb-2">
+                        <label asp-for="Stajyer.Universite" class="form-label"></label>
+                        <input asp-for="Stajyer.Universite" class="form-control form-control-sm" />
+                        <span asp-validation-for="Stajyer.Universite" class="text-danger"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label asp-for="Stajyer.Fakulte" class="form-label"></label>
+                        <input asp-for="Stajyer.Fakulte" class="form-control form-control-sm" />
+                        <span asp-validation-for="Stajyer.Fakulte" class="text-danger"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label asp-for="Stajyer.Bolum" class="form-label"></label>
+                        <input asp-for="Stajyer.Bolum" class="form-control form-control-sm" />
+                        <span asp-validation-for="Stajyer.Bolum" class="text-danger"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label asp-for="Stajyer.Sinif" class="form-label"></label>
+                        <input asp-for="Stajyer.Sinif" class="form-control form-control-sm" />
+                        <span asp-validation-for="Stajyer.Sinif" class="text-danger"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label asp-for="Stajyer.BaslamaYili" class="form-label"></label>
+                        <input asp-for="Stajyer.BaslamaYili" type="date" class="form-control form-control-sm" />
+                        <span asp-validation-for="Stajyer.BaslamaYili" class="text-danger"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label asp-for="Stajyer.OgrenciNo" class="form-label"></label>
+                        <input asp-for="Stajyer.OgrenciNo" class="form-control form-control-sm" />
+                        <span asp-validation-for="Stajyer.OgrenciNo" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Staj Bilgileri -->
+            <div class="col-md-6">
+                <div class="bg-light border p-3">
+                    <h6>Staj Bilgileri</h6>
+                    <div class="mb-2">
+                        <label asp-for="Staj.BaslamaTarihi" class="form-label"></label>
+                        <input asp-for="Staj.BaslamaTarihi" type="date" class="form-control form-control-sm" />
+                        <span asp-validation-for="Staj.BaslamaTarihi" class="text-danger"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label asp-for="Staj.BitisTarihi" class="form-label"></label>
+                        <input asp-for="Staj.BitisTarihi" type="date" class="form-control form-control-sm" />
+                        <span asp-validation-for="Staj.BitisTarihi" class="text-danger"></span>
+                    </div>
+                    <div class="mb-2">
+                        <label asp-for="Staj.StajTuruID" class="form-label">Staj Türü</label>
+                        <select asp-for="Staj.StajTuruID"
+                                asp-items="ViewBag.StajTurleri"
+                                class="form-select form-select-sm">
+                            <option value="">Seçiniz…</option>
+                        </select>
+                        <span class="text-danger" asp-validation-for="Staj.StajTuruID"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Belgeler -->
+        <div class="mb-3">
+            <label asp-for="OgrenciBelgesi" class="form-label">Öğrenci Belgesi</label>
+            <input asp-for="OgrenciBelgesi" type="file" class="form-control form-control-sm" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Transkript" class="form-label">Transkript</label>
+            <input asp-for="Transkript" type="file" class="form-control form-control-sm" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="BasvuruFormu" class="form-label">Staj Başvuru Formu</label>
+            <input asp-for="BasvuruFormu" type="file" class="form-control form-control-sm" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Taahutname" class="form-label">Bilgi Taahütnamesi</label>
+            <input asp-for="Taahutname" type="file" class="form-control form-control-sm" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Referans" class="form-label">Referans Mektubu</label>
+            <input asp-for="Referans" type="file" class="form-control form-control-sm" />
+        </div>
+        <div class="mb-3">
+            <label asp-for="Fotograf" class="form-label">Fotoğraf</label>
+            <input asp-for="Fotograf" type="file" accept="image/*" class="form-control form-control-sm" />
+        </div>
+
+        <!-- Kaydet Butonu -->
+        <div class="text-end">
+            <button type="submit" class="btn btn-success">Kaydet</button>
+        </div>
+    </div>
+</form>

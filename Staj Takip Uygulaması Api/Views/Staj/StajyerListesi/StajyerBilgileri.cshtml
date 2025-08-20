@@ -1,0 +1,151 @@
+@model StajTakipUygulaması.Models.Staj
+
+@{
+    ViewBag.Title = "Stajyer Bilgileri";
+}
+
+@{
+    // Belgeler include edilirken BelgeTipi de ThenInclude ile getiriliyor olmalı
+    var foto = Model.Belgeler?
+        .FirstOrDefault(x => (x.BelgeTipi?.Ad ?? x.BelgeAdı) == "Fotoğraf");
+}
+
+
+<div class="bg-light border rounded p-3 mb-3">
+    <div class="card-body">
+        <h6 class="card-title mb-3">Kişisel Bilgiler</h6>
+
+            <div class="row g-3 align-items-start">
+                <!-- SOL: metinler -->
+                <div class="col">
+                    <p class="mb-1"><strong>Ad Soyad:</strong> @Model.Stajyer.Ad @Model.Stajyer.Soyad</p>
+                    <p class="mb-1"><strong>Cinsiyet:</strong> @Model.Stajyer.Cinsiyet</p>
+                    <p class="mb-1"><strong>TCKN:</strong> @Model.Stajyer.TCKimlikNo</p>
+                    <p class="mb-0"><strong>Doğum Tarihi:</strong> @Model.Stajyer.DogumTarihi</p>
+                </div>
+
+                <!-- SAĞ: foto -->
+                <div class="col-auto ms-auto">
+                    @if (foto != null && !string.IsNullOrWhiteSpace(foto.Yolu))
+                    {
+                        <img src="@foto.Yolu"
+                             alt="Fotoğraf"
+                             class="img-thumbnail"
+                             style="width:120px;height:120px;object-fit:cover;" />
+                    }
+                    else
+                    {
+                        <div class="d-flex align-items-center justify-content-center bg-white border rounded"
+                             style="width:120px;height:120px;">
+                            <span class="text-muted small">Fotoğraf yok</span>
+                        </div>
+                    }
+                </div>
+            </div>
+    </div>
+</div>
+
+            <!-- 🎓 Eğitim Bilgileri -->
+            <div class="bg-light border p-3 mb-3">
+                <h6>Eğitim Bilgileri</h6>
+                <p><strong>Üniversite:</strong> @Model.Stajyer.Universite</p>
+                <p><strong>Fakülte / Enstitü:</strong> @Model.Stajyer.Fakulte</p>
+                <p><strong>Bölüm / Program:</strong> @Model.Stajyer.Bolum</p>
+                <p><strong>Sınıf:</strong> @Model.Stajyer.Sinif</p>
+                <p><strong>Başlama Yılı:</strong> @Model.Stajyer.BaslamaYili.ToShortDateString()</p>
+            </div>
+
+            <!-- 📎 Belgeler -->
+            <div class="bg-light border p-3 mb-3">
+                <h6>Belgeler</h6>
+                <table class="table table-bordered table-sm">
+                    <thead class="thead-light">
+                        <tr>
+                            <th>Belge Tipi</th>
+                            <th>Durum</th>
+                            <th>İşlem</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var tip in ViewBag.BelgeTipleri as List<StajTakipUygulaması.Models.BelgeTipi>)
+                        {
+                            var belge = Model.Belgeler?.FirstOrDefault(b => b.BelgeTipiID == tip.ID);
+                            <tr>
+                                <td>@tip.Ad</td>
+                                <td>
+                                    @if (belge != null)
+                                    {
+                                        <a href="#" onclick="gosterBelge('@belge.Yolu'); return false;">Görüntüle</a>
+                                    }
+                                    else
+                                    {
+                                        <span class="text-danger">Yüklenmedi</span>
+                                    }
+                                </td>
+                                <td>
+                                    @if (belge != null)
+                                    {
+                                        <a asp-controller="Belge" asp-action="Guncelle" asp-route-id="@belge.ID" class="btn btn-sm btn-secondary">Güncelle</a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("Yukle", "Belge", new { stajId = Model.ID, belgeTipId = tip.ID })" class="btn btn-sm btn-primary">Yükle</a>
+                                    }
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- ☎️ İletişim Bilgileri -->
+            <div class="bg-light border p-3 mb-3">
+                <h6>İletişim Bilgileri</h6>
+                <p><strong>Telefon:</strong> @Model.Stajyer.TelNo</p>
+                <p><strong>Email:</strong> @Model.Stajyer.Email</p>
+                <p><strong>Adres:</strong> @Model.Stajyer.Adres</p>
+            </div>
+
+            <!-- 🗂️ Staj Bilgileri -->
+            <div class="bg-light border p-3 mb-3">
+                <h6>Staj Bilgileri</h6>
+                <p><strong>Departman:</strong> @Model.Departman</p>
+                <p><strong>Sorumlu:</strong> @Model.SorumluID</p>
+                <p><strong>Yetkiler:</strong> @Model.Yetkiler</p>
+                <p><strong>Başlama:</strong> @Model.BaslamaTarihi.ToShortDateString()</p>
+                <p><strong>Bitiş:</strong> @Model.BitisTarihi.ToShortDateString()</p>
+                <p><strong>Staj Türü:</strong> @Model.StajTuru?.Ad</p>
+            </div>
+        </div>
+
+        <!-- SAĞ BLOK: 📄 Belge Önizleme -->
+        <div class="col-md-6">
+            <div id="belgePreviewContainer" style="display:none; height: 600px; border: 1px solid #ccc;">
+                <div class="d-flex justify-content-between align-items-center bg-secondary text-white px-2 py-1">
+                    <span>Belge Önizleme</span>
+                    <button class="btn btn-sm btn-light" onclick="kapatBelge()">Kapat</button>
+                </div>
+                <iframe id="belgePreviewFrame" style="width:100%; height:100%;" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 🧠 JS -->
+@section Scripts {
+    <script>
+        function gosterBelge(yol) {
+            const container = document.getElementById("belgePreviewContainer");
+            const iframe = document.getElementById("belgePreviewFrame");
+            iframe.src = yol;
+            container.style.display = "block";
+        }
+
+        function kapatBelge() {
+            const container = document.getElementById("belgePreviewContainer");
+            const iframe = document.getElementById("belgePreviewFrame");
+            iframe.src = "";
+            container.style.display = "none";
+        }
+    </script>
+}

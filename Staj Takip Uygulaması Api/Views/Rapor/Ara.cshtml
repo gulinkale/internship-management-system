@@ -1,0 +1,18 @@
+@{
+    ViewBag.Title = "Rapor Arama";
+    var belgeTipId = Context.Request.Query["belgeTipId"];
+}
+
+@{
+    ViewBag.Title = "Rapor Arama";
+}
+
+<h4>🔎 Rapor Arama</h4>
+
+<form method="post" class="border p-3 bg-light">
+    <div class="form-group">
+        <label>TC / Ad Soyad / Öğrenci No</label>
+        <input name="arama" class="form-control form-control-sm" placeholder="TC, Ad Soyad veya Öğrenci No yazın" />
+    </div>
+    <button type="submit" class="btn btn-primary btn-sm mt-2">Sorgula</button>
+</form>

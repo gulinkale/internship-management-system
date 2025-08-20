@@ -1,0 +1,100 @@
+@model List<StajTakipUygulaması.Models.Stajyer>
+
+@{
+    ViewBag.Title = "Rapor Sonuçları";
+    int belgeTipId = ViewBag.BelgeTipId ?? 0;
+
+    // Bu sayfaya geri dönebilmek için
+    var returnUrl = $"{Context.Request.Path}{Context.Request.QueryString}";
+}
+
+<h4 class="mb-3">🎯 Sorgu Sonuçları</h4>
+
+@if (Model == null || !Model.Any())
+{
+    <div class="alert alert-warning">Eşleşen öğrenci bulunamadı.</div>
+}
+else
+{
+    <table class="table table-bordered table-sm bg-white">
+        <thead class="table-light">
+            <tr>
+                <th>Ad Soyad</th>
+                <th>TC Kimlik No</th>
+                <th>Öğrenci No</th>
+                <th>Rapor</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var stajyer in Model)
+        {
+            var staj = stajyer?.Stajlar?.FirstOrDefault();
+            if (staj == null) { continue; }
+
+            var belge = staj.Belgeler?.FirstOrDefault(b => b.BelgeTipiID == belgeTipId);
+
+            <tr>
+                <td>@($"{stajyer.Ad} {stajyer.Soyad}")</td>
+                <td>@stajyer.TCKimlikNo</td>
+                <td>@stajyer.OgrenciNo</td>
+                <td class="d-flex gap-2">
+                    @if (belge != null && !string.IsNullOrWhiteSpace(belge.Yolu))
+                    {
+                        <a href="#"
+                           class="btn btn-sm btn-primary"
+                           onclick="gosterBelge('@belge.Yolu'); return false;">
+                           Görüntüle
+                        </a>
+
+                        <a class="btn btn-sm btn-warning"
+                           asp-controller="Belge"
+                           asp-action="Guncelle"
+                           asp-route-id="@belge.ID"
+                           asp-route-returnUrl="@returnUrl">
+                           Güncelle
+                        </a>
+                    }
+                    else
+                    {
+                        <a class="btn btn-success btn-sm"
+                           asp-controller="Belge"
+                           asp-action="Yukle"
+                           asp-route-stajId="@staj.ID"
+                           asp-route-belgeTipId="@belgeTipId"
+                           asp-route-returnUrl="@returnUrl">
+                           Yükle
+                        </a>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <!-- 📄 Belge Önizleme Alanı -->
+    <div id="belgePreviewContainer" style="display:none; height: 600px; border: 1px solid #ccc; margin-top:16px;">
+        <div class="d-flex justify-content-between align-items-center bg-secondary text-white px-2 py-1">
+            <span>Belge Önizleme</span>
+            <button type="button" class="btn btn-sm btn-light" onclick="kapatBelge()">Kapat</button>
+        </div>
+        <iframe id="belgePreviewFrame" style="width:100%; height:100%;" frameborder="0"></iframe>
+    </div>
+}
+
+@section Scripts {
+    <script>
+        function gosterBelge(yol) {
+            const c = document.getElementById('belgePreviewContainer');
+            const f = document.getElementById('belgePreviewFrame');
+            f.src = yol;
+            c.style.display = 'block';
+            c.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+        function kapatBelge() {
+            const c = document.getElementById('belgePreviewContainer');
+            const f = document.getElementById('belgePreviewFrame');
+            f.src = '';
+            c.style.display = 'none';
+        }
+    </script>
+}

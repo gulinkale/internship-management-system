@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using StajTakipUygulaması.Application.Interfaces;
 using StajTakipUygulaması.Data;
 using StajTakipUygulaması.Models;
-using StajTakipUygulaması.Services.Interfaces;
 using System.IO;
 
 namespace StajTakipUygulaması.Controllers

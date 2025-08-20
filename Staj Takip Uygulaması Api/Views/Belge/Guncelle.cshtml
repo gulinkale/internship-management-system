@@ -1,0 +1,47 @@
+@model StajTakipUygulaması.Models.Belge
+@{
+    ViewBag.Title = "Belge Güncelle";
+
+    // İptal nereye dönsün?
+    var backUrl = ViewBag.ReturnUrl as string;
+    if (string.IsNullOrWhiteSpace(backUrl))
+        backUrl = Context.Request.Headers["Referer"].ToString();
+    if (string.IsNullOrWhiteSpace(backUrl))
+        backUrl = Url.Action("Details", "Staj", new { id = Model.StajID });
+}
+
+<h4>@ViewBag.BelgeTipAd Güncelle</h4>
+<hr />
+
+<form asp-action="Guncelle"
+      asp-controller="@ViewBag.ControllerName"
+      method="post"
+      enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+
+    <input type="hidden" name="id" value="@Model.ID" />
+    <input type="hidden" name="returnUrl" value="@backUrl" />
+
+    <div class="mb-3">
+        <label class="form-label">Mevcut Belge</label><br />
+        @if (!string.IsNullOrWhiteSpace(Model.Yolu))
+        {
+            <a class="btn btn-outline-primary btn-sm" href="@Model.Yolu" target="_blank">Görüntüle</a>
+        }
+        else
+        {
+            <span class="text-muted">Kayıtlı dosya yok</span>
+        }
+    </div>
+
+    <div class="mb-3">
+        <label class="form-label">Yeni Dosya Seç</label>
+        <input type="file" name="yeniDosya" class="form-control" required />
+    </div>
+
+    <div class="d-flex gap-2">
+        <button type="submit" class="btn btn-primary">Güncelle</button>
+        <a href="@backUrl" class="btn btn-secondary">İptal</a>
+    </div>
+</form>

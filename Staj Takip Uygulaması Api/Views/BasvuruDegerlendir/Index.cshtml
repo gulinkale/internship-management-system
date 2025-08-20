@@ -1,0 +1,89 @@
+@using StajTakipUygulaması.Models
+@model IEnumerable<StajTakipUygulaması.Models.Basvuru>
+
+@{
+    var seciliDurum = (string?)ViewBag.SeciliDurum;
+    bool reddeler = string.Equals(seciliDurum, nameof(BasvuruDurumu.Reddedildi), StringComparison.OrdinalIgnoreCase);
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="m-0">Başvurular</h3>
+
+    @if (reddeler)
+    {
+        <a class="btn btn-sm btn-outline-secondary"
+           asp-controller="BasvuruDegerlendir"
+           asp-action="Index">
+            Tümü
+        </a>
+    }
+    else
+    {
+        <a class="btn btn-sm btn-outline-danger"
+           asp-controller="BasvuruDegerlendir"
+           asp-action="Index"
+           asp-route-durum="Reddedildi">
+            Reddedilenler
+        </a>
+    }
+</div>
+
+@if (TempData["OK"] != null)   { <div class="alert alert-success">@TempData["OK"]</div> }
+@if (TempData["Hata"] != null) { <div class="alert alert-danger">@TempData["Hata"]</div> }
+
+<table class="table table-sm table-striped align-middle">
+    <thead>
+        <tr>
+            <th>Ad Soyad</th>
+            <th>TC</th>
+            <th>Üniversite</th>
+            <th>Bölüm</th>
+            <th>Tel</th>
+            <th>E-posta</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var b in Model)
+    {
+        <tr>
+            <td>
+                <a asp-controller="BasvuruDegerlendir"
+                   asp-action="Detay"
+                   asp-route-id="@b.ID">
+                    @(b.Ad + " " + b.Soyad)
+                </a>
+            </td>
+
+            <td>@b.TCKimlikNo</td>
+            <td>@b.Universite</td>
+            <td>@b.Bolum</td>
+            <td>@b.TelNo</td>
+            <td>@b.Email</td>
+
+            <td class="text-end">
+                @if (!reddeler)
+                {
+                    <a class="btn btn-success btn-sm"
+                       asp-controller="BasvuruDegerlendir"
+                       asp-action="KabulEt"
+                       asp-route-id="@b.ID">Kabul Et</a>
+
+                    <form asp-controller="BasvuruDegerlendir"
+                          asp-action="Reddet"
+                          method="post"
+                          class="d-inline">
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="id" value="@b.ID" />
+                        <button type="submit" class="btn btn-sm btn-outline-danger">Reddet</button>
+                    </form>
+                }
+                else
+                {
+                    <span class="badge bg-danger">Reddedildi</span>
+                }
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
