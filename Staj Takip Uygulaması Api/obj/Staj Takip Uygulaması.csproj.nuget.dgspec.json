@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Staj Takip Uygulaması Api\\Staj Takip Uygulaması.csproj": {}
+    "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Staj Takip Uygulaması Api\\Staj Takip Uygulaması.csproj": {}
   },
   "projects": {
-    "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Application\\Application.csproj": {
+    "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Application\\Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Application\\Application.csproj",
+        "projectUniqueName": "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Application\\Application.csproj",
         "projectName": "Application",
-        "projectPath": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Application\\Application.csproj",
-        "packagesPath": "C:\\Users\\begumtasci\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Application\\obj\\",
+        "projectPath": "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Application\\Application.csproj",
+        "packagesPath": "C:\\Users\\Pau\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Application\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\begumtasci\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Pau\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,14 +26,15 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Domain\\Domain.csproj"
+              "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Domain\\Domain.csproj"
               }
             }
           }
@@ -53,6 +54,12 @@
       "frameworks": {
         "net8.0": {
           "targetAlias": "net8.0",
+          "dependencies": {
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[15.0.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -73,20 +80,20 @@
         }
       }
     },
-    "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Domain\\Domain.csproj": {
+    "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Domain\\Domain.csproj",
+        "projectUniqueName": "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Domain\\Domain.csproj",
-        "packagesPath": "C:\\Users\\begumtasci\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Domain\\obj\\",
+        "projectPath": "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Domain\\Domain.csproj",
+        "packagesPath": "C:\\Users\\Pau\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\begumtasci\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Pau\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -95,6 +102,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -148,20 +156,20 @@
         }
       }
     },
-    "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Persistence\\Infrastructure.csproj": {
+    "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Persistence\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Persistence\\Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Persistence\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Persistence\\Infrastructure.csproj",
-        "packagesPath": "C:\\Users\\begumtasci\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Persistence\\obj\\",
+        "projectPath": "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Persistence\\Infrastructure.csproj",
+        "packagesPath": "C:\\Users\\Pau\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Persistence\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\begumtasci\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Pau\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -170,17 +178,18 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Application\\Application.csproj"
+              "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Application\\Application.csproj"
               },
-              "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Domain\\Domain.csproj"
+              "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Domain\\Domain.csproj"
               }
             }
           }
@@ -230,20 +239,20 @@
         }
       }
     },
-    "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Staj Takip Uygulaması Api\\Staj Takip Uygulaması.csproj": {
+    "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Staj Takip Uygulaması Api\\Staj Takip Uygulaması.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Staj Takip Uygulaması Api\\Staj Takip Uygulaması.csproj",
+        "projectUniqueName": "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Staj Takip Uygulaması Api\\Staj Takip Uygulaması.csproj",
         "projectName": "Staj Takip Uygulaması",
-        "projectPath": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Staj Takip Uygulaması Api\\Staj Takip Uygulaması.csproj",
-        "packagesPath": "C:\\Users\\begumtasci\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Staj Takip Uygulaması Api\\obj\\",
+        "projectPath": "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Staj Takip Uygulaması Api\\Staj Takip Uygulaması.csproj",
+        "packagesPath": "C:\\Users\\Pau\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Staj Takip Uygulaması Api\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\begumtasci\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Pau\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -252,20 +261,21 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net8.0": {
             "targetAlias": "net8.0",
             "projectReferences": {
-              "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Application\\Application.csproj": {
-                "projectPath": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Application\\Application.csproj"
+              "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Application\\Application.csproj": {
+                "projectPath": "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Application\\Application.csproj"
               },
-              "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Domain\\Domain.csproj": {
-                "projectPath": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Domain\\Domain.csproj"
+              "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Domain\\Domain.csproj": {
+                "projectPath": "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Domain\\Domain.csproj"
               },
-              "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Persistence\\Infrastructure.csproj": {
-                "projectPath": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulaması Api\\Persistence\\Infrastructure.csproj"
+              "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Persistence\\Infrastructure.csproj": {
+                "projectPath": "C:\\Users\\Pau\\Desktop\\Staj Takip Uygulaması\\STU\\Persistence\\Infrastructure.csproj"
               }
             }
           }

@@ -1,0 +1,18 @@
+﻿using StajTakipUygulaması.Models;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace StajTakipUygulaması.Services.Interfaces
+{
+    public interface IStajService
+    {
+        Task<List<Staj>> GetAllAsync();
+        Task<Staj> GetByIdAsync(int id);
+        Task AddAsync(Staj staj);
+        Task UpdateAsync(Staj staj);
+        Task DeleteAsync(int id);
+        Task<List<Staj>> GetAktifStajlarAsync();
+        Task<List<Staj>> GetTamamlanmisStajlarAsync();
+
+    }
+}
