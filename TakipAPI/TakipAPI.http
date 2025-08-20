@@ -1,0 +1,6 @@
+@TakipAPI_HostAddress = http://localhost:5235
+
+GET {{TakipAPI_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

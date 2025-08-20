@@ -1,0 +1,59 @@
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\appsettings.Development.json
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\appsettings.json
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Staj Takip Uygulaması.staticwebassets.runtime.json
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Staj Takip Uygulaması.staticwebassets.endpoints.json
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Staj Takip Uygulaması.exe
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Staj Takip Uygulaması.deps.json
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Staj Takip Uygulaması.runtimeconfig.json
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Staj Takip Uygulaması.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Staj Takip Uygulaması.pdb
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Microsoft.Extensions.Caching.Abstractions.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Microsoft.Extensions.Caching.Memory.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.Abstractions.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Microsoft.Extensions.Diagnostics.Abstractions.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Microsoft.Extensions.Hosting.Abstractions.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Microsoft.Extensions.ObjectPool.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Microsoft.Extensions.Primitives.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Newtonsoft.Json.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Application.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Domain.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Infrastructure.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Application.pdb
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Domain.pdb
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\bin\Debug\net8.0\Infrastructure.pdb
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\Staj Takip Uygulaması.csproj.AssemblyReference.cache
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\Staj Takip Uygulaması.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\Staj Takip Uygulaması.AssemblyInfoInputs.cache
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\Staj Takip Uygulaması.AssemblyInfo.cs
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\Staj Takip Uygulaması.csproj.CoreCompileInputs.cache
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\Staj Takip Uygulaması.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\Staj Takip Uygulaması.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\Staj Takip Uygulaması.RazorAssemblyInfo.cache
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\Staj Takip Uygulaması.RazorAssemblyInfo.cs
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\rjimswa.dswa.cache.json
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\rjsmrazor.dswa.cache.json
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\rjsmcshtml.dswa.cache.json
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\scopedcss\bundle\Staj Takip Uygulaması.styles.css
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\scopedcss\projectbundle\Staj Takip Uygulaması.bundle.scp.css
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\staticwebassets.build.json
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\staticwebassets.build.json.cache
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\staticwebassets.development.json
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\staticwebassets.build.endpoints.json
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\staticwebassets.upToDateCheck.txt
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\Staj Tak.F3D41250.Up2Date
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\Staj Takip Uygulaması.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\refint\Staj Takip Uygulaması.dll
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\Staj Takip Uygulaması.pdb
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\Staj Takip Uygulaması.genruntimeconfig.cache
+C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\obj\Debug\net8.0\ref\Staj Takip Uygulaması.dll

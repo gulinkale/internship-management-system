@@ -1,0 +1,122 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{BFD911A0-3340-4B38-9CD5-35C4DD063269}|Domain\\Domain.csproj|c:\\users\\begumtasci\\desktop\\staj takip uygulamas\u0131 api\\domain\\entities\\belge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BFD911A0-3340-4B38-9CD5-35C4DD063269}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\belge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BFD911A0-3340-4B38-9CD5-35C4DD063269}|Domain\\Domain.csproj|c:\\users\\begumtasci\\desktop\\staj takip uygulamas\u0131 api\\domain\\entities\\basvurubelge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BFD911A0-3340-4B38-9CD5-35C4DD063269}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\basvurubelge.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BFD911A0-3340-4B38-9CD5-35C4DD063269}|Domain\\Domain.csproj|c:\\users\\begumtasci\\desktop\\staj takip uygulamas\u0131 api\\domain\\entities\\staj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BFD911A0-3340-4B38-9CD5-35C4DD063269}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\staj.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ABC6737-F46A-49A4-BCC6-254F3976A3BA}|Persistence\\Infrastructure.csproj|c:\\users\\begumtasci\\desktop\\staj takip uygulamas\u0131 api\\persistence\\persistence\\stajcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ABC6737-F46A-49A4-BCC6-254F3976A3BA}|Persistence\\Infrastructure.csproj|solutionrelative:persistence\\persistence\\stajcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{BFD911A0-3340-4B38-9CD5-35C4DD063269}|Domain\\Domain.csproj|c:\\users\\begumtasci\\desktop\\staj takip uygulamas\u0131 api\\domain\\entities\\belgetipi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{BFD911A0-3340-4B38-9CD5-35C4DD063269}|Domain\\Domain.csproj|solutionrelative:domain\\entities\\belgetipi.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{8ABC6737-F46A-49A4-BCC6-254F3976A3BA}|Persistence\\Infrastructure.csproj|c:\\users\\begumtasci\\desktop\\staj takip uygulamas\u0131 api\\persistence\\options\\emailoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{8ABC6737-F46A-49A4-BCC6-254F3976A3BA}|Persistence\\Infrastructure.csproj|solutionrelative:persistence\\options\\emailoptions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 2,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "BelgeTipi.cs",
+              "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Domain\\Entities\\BelgeTipi.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\BelgeTipi.cs",
+              "ToolTip": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Domain\\Entities\\BelgeTipi.cs*",
+              "RelativeToolTip": "Domain\\Entities\\BelgeTipi.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T10:05:15.917Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "StajContext.cs",
+              "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Persistence\\Persistence\\StajContext.cs",
+              "RelativeDocumentMoniker": "Persistence\\Persistence\\StajContext.cs",
+              "ToolTip": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Persistence\\Persistence\\StajContext.cs",
+              "RelativeToolTip": "Persistence\\Persistence\\StajContext.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAqwCMAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T10:05:06.226Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Belge.cs",
+              "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Domain\\Entities\\Belge.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Belge.cs",
+              "ToolTip": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Domain\\Entities\\Belge.cs*",
+              "RelativeToolTip": "Domain\\Entities\\Belge.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T10:03:56.29Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Staj.cs",
+              "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Domain\\Entities\\Staj.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\Staj.cs",
+              "ToolTip": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Domain\\Entities\\Staj.cs",
+              "RelativeToolTip": "Domain\\Entities\\Staj.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAuwA4AAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T10:03:26.086Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "BasvuruBelge.cs",
+              "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Domain\\Entities\\BasvuruBelge.cs",
+              "RelativeDocumentMoniker": "Domain\\Entities\\BasvuruBelge.cs",
+              "ToolTip": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Domain\\Entities\\BasvuruBelge.cs*",
+              "RelativeToolTip": "Domain\\Entities\\BasvuruBelge.cs*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T10:02:31.46Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "EmailOptions.cs",
+              "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Persistence\\Options\\EmailOptions.cs",
+              "RelativeDocumentMoniker": "Persistence\\Options\\EmailOptions.cs",
+              "ToolTip": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Persistence\\Options\\EmailOptions.cs",
+              "RelativeToolTip": "Persistence\\Options\\EmailOptions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-20T10:01:56.562Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
