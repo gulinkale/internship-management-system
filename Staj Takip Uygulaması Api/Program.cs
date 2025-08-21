@@ -1,7 +1,7 @@
 using StajTakipUygulamasý.Application.Interfaces;
+using StajTakipUygulamasý.Domain.Entities.Services;
 using StajTakipUygulamasý.Infrastructure.Services;
 using StajTakipUygulamasý.Models;
-using StajTakipUygulamasý.Persistence.Services;
 
 
 var builder = WebApplication.CreateBuilder(args);

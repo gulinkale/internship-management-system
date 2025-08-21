@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
-using Application.DTOs;
-using StajTakipUygulaması.Models;
+using StajTakipUygulamasi.Application.DTOs.BasvuruBelge;
+using StajTakipUygulaması.Application.DTOs;
+using StajTakipUygulaması.Domain.Entities;
+
 namespace StajTakipUygulaması.Application.Mapping
 {
     public class BasvuruBelgeProfile : Profile

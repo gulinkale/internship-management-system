@@ -1,8 +1,9 @@
-﻿using Microsoft.Extensions.Options;
-using StajTakipUygulaması.Application.Interfaces;
-using StajTakipUygulaması.Models;
+﻿// StajTakipUygulaması.Infrastructure/Services/SmtpEmailSender.cs
 using System.Net;
 using System.Net.Mail;
+using Microsoft.Extensions.Options;
+using StajTakipUygulaması.Application.Interfaces;
+using StajTakipUygulaması.Models;
 
 namespace StajTakipUygulaması.Infrastructure.Services
 {
@@ -11,7 +12,7 @@ namespace StajTakipUygulaması.Infrastructure.Services
         private readonly EmailOptions _opt;
         public SmtpEmailSender(IOptions<EmailOptions> opt) => _opt = opt.Value;
 
-        public async Task SendAsync(string to, string subject, string bodyHtml)
+        public async Task SendAsync(string to, string subject, string bodyHtml, CancellationToken ct = default)
         {
             if (string.IsNullOrWhiteSpace(to)) return;
 
@@ -33,6 +34,7 @@ namespace StajTakipUygulaması.Infrastructure.Services
                     : new NetworkCredential(_opt.UserName, _opt.Password)
             };
 
+            // iptal desteği yok; ct’yi sadece imza uyumu için alıyoruz
             await smtp.SendMailAsync(msg);
         }
     }

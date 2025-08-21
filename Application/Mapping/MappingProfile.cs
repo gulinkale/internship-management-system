@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using StajTakipUygulaması.Application.DTOs;
-using StajTakipUygulaması.Models; // Entity’lerin bulunduğu namespace
+using StajTakipUygulaması.Domain.Entities;
 
 namespace StajTakipUygulaması.Application.Mapping
 {
@@ -16,7 +16,7 @@ namespace StajTakipUygulaması.Application.Mapping
             CreateMap<Belge, BelgeCreateDto>().ReverseMap();
             CreateMap<Belge, BelgeUpdateDto>().ReverseMap();
 
-            CreateMap<StajTakipUygulaması.Models.BelgeTipi, BelgeTipiDto>().ReverseMap();
+            CreateMap<StajTakipUygulaması.Domain.Entities.BelgeTipi, BelgeTipiDto>().ReverseMap();
 
             CreateMap<BelgeTipi, BelgeTipiDto>().ReverseMap();
         }

@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 using System.ComponentModel.DataAnnotations;
-using StajTakipUygulaması.Models;
 namespace StajTakipUygulaması.Domain.Entities
 {
     public class StajTuru

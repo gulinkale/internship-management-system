@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.ModelBinding; // bunu da ekle en üste
+using Microsoft.AspNetCore.Mvc.ModelBinding;
+using StajTakipUygulaması.Domain.Entities; // bunu da ekle en üste
 
 namespace StajTakipUygulaması.Models
 {

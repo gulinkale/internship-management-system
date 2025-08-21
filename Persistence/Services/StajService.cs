@@ -1,36 +1,37 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using StajTakipUygulaması.Data;
-using StajTakipUygulaması.Models;
 using StajTakipUygulaması.Application.Interfaces;
+using StajTakipUygulaması.Data;
+using StajTakipUygulaması.Domain.Entities;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
-namespace StajTakipUygulaması.Infrastructure.Services
+namespace StajTakipUygulamasi.Infrastructure.Services
 {
     public class StajService : IStajService
     {
         private readonly StajContext _context;
 
-        public StajService(StajContext context)
-        {
-            _context = context;
-        }
+        public StajService(StajContext context) => _context = context;
 
         public async Task<List<Staj>> GetAllAsync()
-        {
-            return await _context.Stajlar.Include(s => s.Stajyer).ToListAsync();
-        }
-
-        public async Task<Staj> GetByIdAsync(int id)
         {
             return await _context.Stajlar
                 .Include(s => s.Stajyer)
                 .Include(s => s.StajTuru)
-                .Include(s => s.Belgeler) // <-- BU SATIR EKLENECEK
-                .ThenInclude(b => b.BelgeTipi) // <-- BU DA GEREKLİ
-                .FirstOrDefaultAsync(s => s.ID == id);
+                .Include(s => s.Belgeler).ThenInclude(b => b.BelgeTipi)
+                .ToListAsync();
         }
 
+        public async Task<Staj?> GetByIdAsync(int id)
+        {
+            return await _context.Stajlar
+                .Include(s => s.Stajyer)
+                .Include(s => s.StajTuru)
+                .Include(s => s.Belgeler).ThenInclude(b => b.BelgeTipi)
+                .FirstOrDefaultAsync(s => s.ID == id);
+        }
 
         public async Task AddAsync(Staj staj)
         {
@@ -40,6 +41,7 @@ namespace StajTakipUygulaması.Infrastructure.Services
 
         public async Task UpdateAsync(Staj staj)
         {
+            // İstersen sadece gelen alanları güncelleyecek şekilde genişletebilirsin
             _context.Stajlar.Update(staj);
             await _context.SaveChangesAsync();
         }
@@ -47,16 +49,17 @@ namespace StajTakipUygulaması.Infrastructure.Services
         public async Task DeleteAsync(int id)
         {
             var staj = await _context.Stajlar.FindAsync(id);
-            if (staj != null)
-            {
-                _context.Stajlar.Remove(staj);
-                await _context.SaveChangesAsync();
-            }
+            if (staj is null) return;
+
+            _context.Stajlar.Remove(staj);
+            await _context.SaveChangesAsync();
         }
+
         public async Task<List<Staj>> GetAktifStajlarAsync()
         {
+            var now = DateTime.Now.Date;
             return await _context.Stajlar
-                .Where(s => s.BitisTarihi > DateTime.Now)
+                .Where(s => s.BitisTarihi >= now)
                 .Include(s => s.Stajyer)
                 .Include(s => s.StajTuru)
                 .ToListAsync();
@@ -64,12 +67,12 @@ namespace StajTakipUygulaması.Infrastructure.Services
 
         public async Task<List<Staj>> GetTamamlanmisStajlarAsync()
         {
+            var now = DateTime.Now.Date;
             return await _context.Stajlar
-                .Where(s => s.BitisTarihi <= DateTime.Now)
+                .Where(s => s.BitisTarihi < now)
                 .Include(s => s.Stajyer)
                 .Include(s => s.StajTuru)
                 .ToListAsync();
         }
-
     }
 }

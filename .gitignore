@@ -8,3 +8,9 @@ obj/
 *.dll
 *.exe
 *.log
+.vs/
+**/bin/
+**/obj/
+*.suo
+*.user
+*.cache

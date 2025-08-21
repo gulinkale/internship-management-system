@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Application.DTOs;                 // DTO'lar
-using StajTakipUygulaması.Models;      // Entity'ler
+using StajTakipUygulaması.Application.DTOs;
+using StajTakipUygulaması.Domain.Entities;
 
 namespace StajTakipUygulaması.Application.Mapping
 {

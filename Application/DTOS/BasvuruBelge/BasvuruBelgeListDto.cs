@@ -1,11 +1,14 @@
-﻿namespace StajTakipUygulaması.Application.DTOs
+﻿namespace StajTakipUygulamasi.Application.DTOs.BasvuruBelge
 {
     public class BasvuruBelgeListDto
     {
         public int ID { get; set; }
-        public string BelgeAdi { get; set; } = string.Empty;   // Entity: BelgeAdı
-        public string? BelgeTipiAdi { get; set; }              // Nav: BelgeTipi.Ad
-        public string? DosyaYolu { get; set; }                 // Entity: Yolu
-        public int BasvuruID { get; set; }
+        public string BelgeAdi { get; set; }
+        public string? DosyaYolu { get; set; }
+        public int BelgeTipiID { get; set; }
+        public string? BelgeTipiAdi { get; set; }
+
+        // Eklenmesi gereken alan
+        public string? Aciklama { get; set; }
     }
 }

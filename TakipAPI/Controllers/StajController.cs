@@ -2,7 +2,7 @@
 // Dosya: Controllers/StajController.cs
 using Microsoft.AspNetCore.Mvc;
 using StajTakipUygulaması.Application.Interfaces; // IStajService
-using StajTakipUygulaması.Models;                // Staj entity
+using StajTakipUygulaması.Domain.Entities;
 
 namespace StajTakipUygulaması.Api.Controllers
 {

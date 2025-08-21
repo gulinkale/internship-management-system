@@ -1,4 +1,5 @@
-﻿using System;
+﻿using StajTakipUygulamasi.Application.DTOs.BasvuruBelge;
+using System;
 using System.Collections.Generic;
 
 namespace StajTakipUygulaması.Application.DTOs

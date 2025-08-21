@@ -2,6 +2,7 @@
 using StajTakipUygulaması.Application.DTOs;
 using StajTakipUygulaması.Application.Interfaces;
 using StajTakipUygulaması.Data;
+using StajTakipUygulaması.Domain.Entities;
 using StajTakipUygulaması.Models;
 
 namespace StajTakipUygulaması.Infrastructure.Services

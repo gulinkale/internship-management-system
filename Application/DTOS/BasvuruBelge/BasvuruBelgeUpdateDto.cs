@@ -1,6 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using StajTakipUygulaması.Application.DTOs;
+using System.ComponentModel.DataAnnotations;
 
-namespace StajTakipUygulaması.Application.DTOs
+namespace StajTakipUygulamasi.Application.DTOs.BasvuruBelge
 {
     public class BasvuruBelgeUpdateDto : BasvuruBelgeCreateDto
     {

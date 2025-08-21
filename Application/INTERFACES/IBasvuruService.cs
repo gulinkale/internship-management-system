@@ -1,4 +1,4 @@
-﻿using Application.DTOs;
+﻿using StajTakipUygulaması.Application.DTOs;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -12,5 +12,6 @@ namespace StajTakipUygulaması.Application.Interfaces
         Task<bool> BasvuruGuncelleAsync(BasvuruUpdateDto dto);
         Task<bool> BasvuruOnaylaAsync(int id);
         Task<bool> BasvuruReddetAsync(BasvuruReddetDto dto);
+        Task<bool> BeklemeyeAlAsync(int id);
     }
 }

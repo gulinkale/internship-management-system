@@ -3,6 +3,7 @@ using Microsoft.Extensions.Configuration;
 using StajTakipUygulaması.Application.DTOs;
 using StajTakipUygulaması.Application.Interfaces;
 using StajTakipUygulaması.Data;            // StajContext
+using StajTakipUygulaması.Domain.Entities;
 using StajTakipUygulaması.Models;          // Belge, BelgeTipi entity'leri
 
 namespace StajTakipUygulaması.Infrastructure.Services

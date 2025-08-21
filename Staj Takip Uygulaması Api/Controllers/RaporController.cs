@@ -1,45 +1,60 @@
+using System.Threading;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using StajTakipUygulaması.Application.Interfaces;
 using StajTakipUygulaması.Data;
 
 namespace StajTakipUygulaması.Controllers
 {
+    [Route("[controller]/[action]")]
     public class RaporController : Controller
     {
-        private readonly StajContext _context;
+        private readonly IRaporService _raporService;
+        private readonly StajContext _ctx; // Belge tipi dropdown için
 
-        public RaporController(StajContext context)
+        public RaporController(IRaporService raporService, StajContext ctx)
         {
-            _context = context;
+            _raporService = raporService;
+            _ctx = ctx;
         }
 
-        // Arama ekranı (GET)
+        // Arama formu (GET)
         [HttpGet]
-        public IActionResult Ara(int belgeTipId)
+        public async Task<IActionResult> Ara(int belgeTipId = 0, CancellationToken ct = default)
         {
-            // Tek isim kullan: BelgeTipId
             ViewBag.BelgeTipId = belgeTipId;
-            return View();
+            ViewBag.BelgeTipleri = await _ctx.BelgeTipleri
+                .AsNoTracking()
+                .OrderBy(t => t.Ad)
+                .Select(t => new SelectListItem { Value = t.ID.ToString(), Text = t.Ad })
+                .ToListAsync(ct);
+
+            return View(); // Views/Rapor/Ara.cshtml
         }
 
         // Arama sonucu (POST)
         [HttpPost]
-        public async Task<IActionResult> Ara(string arama, int belgeTipId)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Ara(string arama, int belgeTipId, CancellationToken ct)
         {
-            var stajyerler = await _context.Stajyerler
-                .Include(s => s.Stajlar)
-                    .ThenInclude(staj => staj.Belgeler)
-                .Where(s =>
-                    s.TCKimlikNo == arama ||
-                    (s.Ad + " " + s.Soyad).Contains(arama) ||
-                    s.OgrenciNo == arama
-                )
-                .ToListAsync();
+            if (string.IsNullOrWhiteSpace(arama))
+            {
+                TempData["Hata"] = "Lütfen arama alanını doldurun.";
+                return RedirectToAction(nameof(Ara), new { belgeTipId });
+            }
 
-            // Tek isim kullan: BelgeTipId
+            var sonuc = await _raporService.AraAsync(arama.Trim(), belgeTipId, ct);
+
             ViewBag.BelgeTipId = belgeTipId;
+            ViewBag.BelgeTipleri = await _ctx.BelgeTipleri
+                .AsNoTracking()
+                .OrderBy(t => t.Ad)
+                .Select(t => new SelectListItem { Value = t.ID.ToString(), Text = t.Ad })
+                .ToListAsync(ct);
 
-            return View("Sonuc", stajyerler);
+            return View("Sonuc", sonuc); // Views/Rapor/Sonuc.cshtml -> @model List<RaporStajyerDto>
         }
     }
 }

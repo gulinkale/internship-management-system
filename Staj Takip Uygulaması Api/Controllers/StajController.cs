@@ -3,6 +3,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Http.Json;
 using StajTakipUygulaması.Models;
+using StajTakipUygulaması.Domain.Entities;
 
 namespace StajTakipUygulaması.Web.Controllers
 {
