@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using StajTakipUygulaması.Application.Interfaces;
 using StajTakipUygulaması.Data;
 using StajTakipUygulaması.Models;
-using StajTakipUygulaması.Services.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
