@@ -1,82 +1,71 @@
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using StajTakipUygulamasý.Application.Interfaces;
 using StajTakipUygulamasý.Data;                 // StajContext
-using StajTakipUygulamasý.Infrastructure.Services; // StajService, StajyerService, BelgeService, BelgeTipiService, BasvuruService, RaporService
+using StajTakipUygulamasý.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// DB
+var cs = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<StajContext>(opt => opt.UseSqlServer(cs));
 
-//TakipAPI program.cs
-
-// ---------------- DB ----------------
-builder.Services.AddDbContext<StajContext>(opt =>
-{
-    var cs = builder.Configuration.GetConnectionString("Default");
-    opt.UseSqlServer(cs);
-});
-
-// -------------- DI ------------------
+// DI
 builder.Services.AddScoped<IStajyerService, StajyerService>();
 builder.Services.AddScoped<IStajService, StajService>();
 builder.Services.AddScoped<IBelgeService, BelgeService>();
 builder.Services.AddScoped<IBelgeTipiService, BelgeTipiService>();
-builder.Services.AddScoped<IBasvuruService, BasvuruService>();   // varsa
-builder.Services.AddScoped<IRaporService, RaporService>();       // varsa
-
-// File storage kökünü webroot'a göre ayarlayalým:
+builder.Services.AddScoped<IBasvuruService, BasvuruService>();
+builder.Services.AddScoped<IRaporService, RaporService>();
 builder.Services.AddSingleton<IFileStorage>(sp =>
 {
     var env = sp.GetRequiredService<IWebHostEnvironment>();
-    return new FileSystemFileStorage(env.WebRootPath); // wwwroot/...
+    return new FileSystemFileStorage(env.WebRootPath);
 });
 builder.Services.AddSingleton<IEmailSender, SmtpEmailSender>();
 
-// -------- Controllers + Swagger ------
+// API + Swagger
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-// --------- Upload limitleri ----------
-builder.Services.Configure<FormOptions>(o =>
+builder.Services.AddSwaggerGen(c =>
 {
-    o.MultipartBodyLengthLimit = 200L * 1024L * 1024L; // 200 MB
-    o.ValueLengthLimit = int.MaxValue;
-    o.MultipartHeadersLengthLimit = int.MaxValue;
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Staj Takip API", Version = "v1" });
 });
 
-// ---------------- CORS ---------------
+// Upload limit (opsiyonel)
+builder.Services.Configure<FormOptions>(o =>
+{
+    o.MultipartBodyLengthLimit = 200L * 1024L * 1024L;
+});
+
 const string CorsPolicy = "AllowWeb";
 builder.Services.AddCors(opt =>
 {
     opt.AddPolicy(CorsPolicy, p => p
-        .WithOrigins(
-            "http://localhost:5173",
-            "http://localhost:3000",
-            "http://localhost:4200")
-        .AllowAnyHeader()
-        .AllowAnyMethod()
-        .AllowCredentials());
+        .WithOrigins("http://localhost:5173", "http://localhost:3000", "http://localhost:4200")
+        .AllowAnyHeader().AllowAnyMethod().AllowCredentials());
 });
 
 var app = builder.Build();
 
-// -------------- Pipeline -------------
+// Pipeline
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Staj Takip API v1");
+        c.RoutePrefix = "swagger";
+    });
 }
 
-app.UseStaticFiles();   // wwwroot/belgeler gibi dosyalar
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
 app.UseCors(CorsPolicy);
-
-// auth yoksa kapalý:
 // app.UseAuthentication();
 // app.UseAuthorization();
-
 app.MapControllers();
-
 app.Run();

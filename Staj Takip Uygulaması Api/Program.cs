@@ -1,25 +1,21 @@
-
+using Microsoft.EntityFrameworkCore;
 using StajTakipUygulamasý.Application.Interfaces;
-using StajTakipUygulamasý.Data;                 // StajContext
-using StajTakipUygulamasý.Infrastructure.Services; // StajService, StajyerService, BelgeService, BelgeTipiService, BasvuruService, RaporService
+using StajTakipUygulamasý.Data;
+using StajTakipUygulamasý.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ---------------- DB ----------------
-builder.Services.AddSingleton<IFileStorage>(sp =>
-{
-    var env = sp.GetRequiredService<IWebHostEnvironment>();
-    return new FileSystemFileStorage(env.WebRootPath);
-});
+// DB
+var conn = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<StajContext>(options => options.UseSqlServer(conn));
 
-// -------------- DI ------------------
+// DI
 builder.Services.AddScoped<IStajyerService, StajyerService>();
 builder.Services.AddScoped<IStajService, StajService>();
 builder.Services.AddScoped<IBelgeService, BelgeService>();
 builder.Services.AddScoped<IBelgeTipiService, BelgeTipiService>();
-builder.Services.AddScoped<IBasvuruService, BasvuruService>();   // UI controller'larýnda kullanýlýyor
+builder.Services.AddScoped<IBasvuruService, BasvuruService>();
 builder.Services.AddScoped<IRaporService, RaporService>();
-
 builder.Services.AddSingleton<IFileStorage>(sp =>
 {
     var env = sp.GetRequiredService<IWebHostEnvironment>();
@@ -27,12 +23,12 @@ builder.Services.AddSingleton<IFileStorage>(sp =>
 });
 builder.Services.AddSingleton<IEmailSender, SmtpEmailSender>();
 
-// ------------- MVC Views ------------
+// MVC
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// -------------- Pipeline -------------
+// Pipeline
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
@@ -42,12 +38,9 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-
-// auth yoksa kapalý:
 // app.UseAuthentication();
 // app.UseAuthorization();
 
-// default MVC yönlendirmesi
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
