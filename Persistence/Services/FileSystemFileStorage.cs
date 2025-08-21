@@ -1,31 +1,35 @@
 ﻿using StajTakipUygulaması.Application.Interfaces;
 
-public class FileSystemFileStorage : IFileStorage
+namespace StajTakipUygulaması.Infrastructure.Services
 {
-    private readonly string _webRoot;
 
-    // DI'dan düz string webRootPath alıyoruz (IWebHostEnvironment YOK)
-    public FileSystemFileStorage(string webRootPath)
+    public class FileSystemFileStorage : IFileStorage
     {
-        _webRoot = string.IsNullOrWhiteSpace(webRootPath)
-            ? Path.Combine(AppContext.BaseDirectory, "wwwroot")
-            : webRootPath;
+        private readonly string _webRoot;
 
-        Directory.CreateDirectory(_webRoot);
-    }
+        // DI'dan düz string webRootPath alıyoruz (IWebHostEnvironment YOK)
+        public FileSystemFileStorage(string webRootPath)
+        {
+            _webRoot = string.IsNullOrWhiteSpace(webRootPath)
+                ? Path.Combine(AppContext.BaseDirectory, "wwwroot")
+                : webRootPath;
 
-    public async Task<string> SaveAsync(Stream content, string originalFileName, string subFolder)
-    {
-        var folder = Path.Combine(_webRoot, (subFolder ?? "").Trim('/', '\\'));
-        Directory.CreateDirectory(folder);
+            Directory.CreateDirectory(_webRoot);
+        }
 
-        var ext = Path.GetExtension(originalFileName);
-        var name = $"{Guid.NewGuid():N}{ext}";
-        var physical = Path.Combine(folder, name);
+        public async Task<string> SaveAsync(Stream content, string originalFileName, string subFolder)
+        {
+            var folder = Path.Combine(_webRoot, (subFolder ?? "").Trim('/', '\\'));
+            Directory.CreateDirectory(folder);
 
-        using var fs = new FileStream(physical, FileMode.Create);
-        await content.CopyToAsync(fs);
+            var ext = Path.GetExtension(originalFileName);
+            var name = $"{Guid.NewGuid():N}{ext}";
+            var physical = Path.Combine(folder, name);
 
-        return "/" + Path.Combine(subFolder ?? "", name).Replace("\\", "/");
+            using var fs = new FileStream(physical, FileMode.Create);
+            await content.CopyToAsync(fs);
+
+            return "/" + Path.Combine(subFolder ?? "", name).Replace("\\", "/");
+        }
     }
 }

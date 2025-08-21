@@ -4,7 +4,7 @@ using StajTakipUygulaması.Application.DTOs;
 using StajTakipUygulaması.Application.Interfaces;
 using StajTakipUygulaması.Data;
 
-namespace StajTakipUygulaması.Domain.Entities.Services
+namespace StajTakipUygulaması.Infrastructure.Services
 {
     public class BelgeTipiService : IBelgeTipiService
     {

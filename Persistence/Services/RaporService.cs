@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using StajTakipUygulaması.Application.DTOs;
 using StajTakipUygulaması.Data;
 
-namespace StajTakipUygulamasi.Infrastructure.Services
+namespace StajTakipUygulaması.Infrastructure.Services
 {
     public class RaporService : IRaporService
     {

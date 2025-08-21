@@ -1,45 +1,53 @@
-using StajTakipUygulamasý.Application.Interfaces;
-using StajTakipUygulamasý.Domain.Entities.Services;
-using StajTakipUygulamasý.Infrastructure.Services;
-using StajTakipUygulamasý.Models;
 
+using StajTakipUygulamasý.Application.Interfaces;
+using StajTakipUygulamasý.Data;                 // StajContext
+using StajTakipUygulamasý.Infrastructure.Services; // StajService, StajyerService, BelgeService, BelgeTipiService, BasvuruService, RaporService
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-builder.Services.AddScoped<IFileStorage, FileSystemFileStorage>();
-builder.Services.AddScoped<IBelgeService, BelgeService>();
+// ---------------- DB ----------------
+builder.Services.AddSingleton<IFileStorage>(sp =>
+{
+    var env = sp.GetRequiredService<IWebHostEnvironment>();
+    return new FileSystemFileStorage(env.WebRootPath);
+});
+
+// -------------- DI ------------------
 builder.Services.AddScoped<IStajyerService, StajyerService>();
-
-builder.Services.Configure<EmailOptions>(builder.Configuration.GetSection("Smtp"));
-builder.Services.AddScoped<IEmailSender, SmtpEmailSender>();
-
+builder.Services.AddScoped<IStajService, StajService>();
+builder.Services.AddScoped<IBelgeService, BelgeService>();
 builder.Services.AddScoped<IBelgeTipiService, BelgeTipiService>();
+builder.Services.AddScoped<IBasvuruService, BasvuruService>();   // UI controller'larýnda kullanýlýyor
+builder.Services.AddScoped<IRaporService, RaporService>();
 
 builder.Services.AddSingleton<IFileStorage>(sp =>
 {
     var env = sp.GetRequiredService<IWebHostEnvironment>();
-    return new FileSystemFileStorage(env.WebRootPath); // webroot'ý burada veriyoruz
+    return new FileSystemFileStorage(env.WebRootPath);
 });
+builder.Services.AddSingleton<IEmailSender, SmtpEmailSender>();
+
+// ------------- MVC Views ------------
+builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
+// -------------- Pipeline -------------
 if (!app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
-
 app.UseRouting();
 
-app.UseAuthorization();
+// auth yoksa kapalý:
+// app.UseAuthentication();
+// app.UseAuthorization();
 
+// default MVC yönlendirmesi
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");

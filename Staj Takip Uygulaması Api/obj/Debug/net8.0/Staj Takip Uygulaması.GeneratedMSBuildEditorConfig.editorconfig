@@ -9,97 +9,93 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = StajTakipUygulaması
 build_property.RootNamespace = StajTakipUygulaması
-build_property.ProjectDir = C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api\
+build_property.ProjectDir = C:\Users\Pau\Desktop\Staj Takip Uygulaması\STU\Staj Takip Uygulaması Api\
 build_property.EnableComHosting = 
 build_property.EnableGeneratedComInterfaceComImportInterop = 
 build_property.RazorLangVersion = 8.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Staj Takip Uygulaması Api
+build_property.MSBuildProjectDirectory = C:\Users\Pau\Desktop\Staj Takip Uygulaması\STU\Staj Takip Uygulaması Api
 build_property._RazorSourceGeneratorDebug = 
 build_property.EffectiveAnalysisLevelStyle = 8.0
 build_property.EnableCodeStyleSeverity = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/BasvuruDegerlendir/Detay.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/BasvuruDegerlendir/Detay.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFzdnVydURlZ2VybGVuZGlyXERldGF5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/BasvuruDegerlendir/Index.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/BasvuruDegerlendir/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFzdnVydURlZ2VybGVuZGlyXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/BasvuruDegerlendir/KabulEt.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/BasvuruDegerlendir/KabulEt.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmFzdnVydURlZ2VybGVuZGlyXEthYnVsRXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/Belge/Belge.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmVsZ2VcQmVsZ2UuY3NodG1s
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/Belge/Guncelle.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/Belge/Guncelle.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmVsZ2VcR3VuY2VsbGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/Belge/Yukle.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/Belge/Yukle.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQmVsZ2VcWXVrbGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/Home/Index.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/Home/Privacy.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/PauDisiOgrenci/Create.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/PauDisiOgrenci/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF1RGlzaU9ncmVuY2lcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/PauOgrenci/Create.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/PauOgrenci/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUGF1T2dyZW5jaVxDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/Rapor/Ara.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/Rapor/Ara.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFwb3JcQXJhLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/Rapor/Sonuc.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/Rapor/Sonuc.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUmFwb3JcU29udWMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/Shared/Error.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/StajyerBasvuru/Create.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/StajyerBasvuru/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhanllckJhc3Z1cnVcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/Staj/StajyerListesi/Aktif.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/Staj/StajyerListesi/Aktif.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhalxTdGFqeWVyTGlzdGVzaVxBa3RpZi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/Staj/StajyerListesi/StajyerBilgileri.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/Staj/StajyerListesi/StajyerBilgileri.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhalxTdGFqeWVyTGlzdGVzaVxTdGFqeWVyQmlsZ2lsZXJpLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/Staj/StajyerListesi/Tamamlanmıs.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/Staj/StajyerListesi/Tamamlanmıs.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU3RhalxTdGFqeWVyTGlzdGVzaVxUYW1hbWxhbm3EsXMuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/_ViewImports.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/_ViewStart.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/begumtasci/Desktop/Staj Takip Uygulaması Api/Staj Takip Uygulaması Api/Views/Shared/_Layout.cshtml]
+[C:/Users/Pau/Desktop/Staj Takip Uygulaması/STU/Staj Takip Uygulaması Api/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-453d9d80ok
