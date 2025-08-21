@@ -1,8 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using StajTakipUygulaması.Data;
-using StajTakipUygulaması.Models;
 using StajTakipUygulaması.Application.Interfaces;
+using StajTakipUygulaması.Domain.Entities;
 
 namespace StajTakipUygulaması.Api.Controllers.v1
 {

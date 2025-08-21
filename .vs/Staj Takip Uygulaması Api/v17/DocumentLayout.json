@@ -1,12 +1,88 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{EF707E8C-E053-4D0A-8AD5-DCCAB22A4884}|Staj Takip Uygulamas\u0131 Api\\Staj Takip Uygulamas\u0131.csproj|c:\\users\\begumtasci\\desktop\\staj takip uygulamas\u0131 api\\staj takip uygulamas\u0131 api\\controllers\\pauogrencicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF707E8C-E053-4D0A-8AD5-DCCAB22A4884}|Staj Takip Uygulamas\u0131 Api\\Staj Takip Uygulamas\u0131.csproj|solutionrelative:staj takip uygulamas\u0131 api\\controllers\\pauogrencicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF707E8C-E053-4D0A-8AD5-DCCAB22A4884}|Staj Takip Uygulamas\u0131 Api\\Staj Takip Uygulamas\u0131.csproj|c:\\users\\begumtasci\\desktop\\staj takip uygulamas\u0131 api\\staj takip uygulamas\u0131 api\\controllers\\paudisiogrencicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{EF707E8C-E053-4D0A-8AD5-DCCAB22A4884}|Staj Takip Uygulamas\u0131 Api\\Staj Takip Uygulamas\u0131.csproj|solutionrelative:staj takip uygulamas\u0131 api\\controllers\\paudisiogrencicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{EF707E8C-E053-4D0A-8AD5-DCCAB22A4884}|Staj Takip Uygulamas\u0131 Api\\Staj Takip Uygulamas\u0131.csproj|c:\\users\\begumtasci\\desktop\\staj takip uygulamas\u0131 api\\staj takip uygulamas\u0131 api\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{EF707E8C-E053-4D0A-8AD5-DCCAB22A4884}|Staj Takip Uygulamas\u0131 Api\\Staj Takip Uygulamas\u0131.csproj|solutionrelative:staj takip uygulamas\u0131 api\\views\\shared\\error.cshtml||{40D31677-CBC0-4297-A9EF-89D907823A98}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{304677EC-2942-4D84-93EB-9DC356129689}|TakipAPI\\TakipAPI.csproj|c:\\users\\begumtasci\\desktop\\staj takip uygulamas\u0131 api\\takipapi\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{304677EC-2942-4D84-93EB-9DC356129689}|TakipAPI\\TakipAPI.csproj|solutionrelative:takipapi\\controllers\\homecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "PauOgrenciController.cs",
+              "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Staj Takip Uygulamas\u0131 Api\\Controllers\\PauOgrenciController.cs",
+              "RelativeDocumentMoniker": "Staj Takip Uygulamas\u0131 Api\\Controllers\\PauOgrenciController.cs",
+              "ToolTip": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Staj Takip Uygulamas\u0131 Api\\Controllers\\PauOgrenciController.cs",
+              "RelativeToolTip": "Staj Takip Uygulamas\u0131 Api\\Controllers\\PauOgrenciController.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADYAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T12:49:00.829Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "PauDisiOgrenciController.cs",
+              "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Staj Takip Uygulamas\u0131 Api\\Controllers\\PauDisiOgrenciController.cs",
+              "RelativeDocumentMoniker": "Staj Takip Uygulamas\u0131 Api\\Controllers\\PauDisiOgrenciController.cs",
+              "ToolTip": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Staj Takip Uygulamas\u0131 Api\\Controllers\\PauDisiOgrenciController.cs",
+              "RelativeToolTip": "Staj Takip Uygulamas\u0131 Api\\Controllers\\PauDisiOgrenciController.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAwwDUAAAAiAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T12:48:19.648Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "HomeController.cs",
+              "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\TakipAPI\\Controllers\\HomeController.cs",
+              "RelativeDocumentMoniker": "TakipAPI\\Controllers\\HomeController.cs",
+              "ToolTip": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\TakipAPI\\Controllers\\HomeController.cs",
+              "RelativeToolTip": "TakipAPI\\Controllers\\HomeController.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAiwCIAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-21T12:45:26.871Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Error.cshtml",
+              "DocumentMoniker": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Staj Takip Uygulamas\u0131 Api\\Views\\Shared\\Error.cshtml",
+              "RelativeDocumentMoniker": "Staj Takip Uygulamas\u0131 Api\\Views\\Shared\\Error.cshtml",
+              "ToolTip": "C:\\Users\\begumtasci\\Desktop\\Staj Takip Uygulamas\u0131 Api\\Staj Takip Uygulamas\u0131 Api\\Views\\Shared\\Error.cshtml",
+              "RelativeToolTip": "Staj Takip Uygulamas\u0131 Api\\Views\\Shared\\Error.cshtml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAABQAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000759|",
+              "WhenOpened": "2025-08-21T12:41:59.619Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }

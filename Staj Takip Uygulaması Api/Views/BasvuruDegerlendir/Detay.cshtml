@@ -1,5 +1,5 @@
-@using StajTakipUygulaması.Models
-@model StajTakipUygulaması.Models.Basvuru
+@using StajTakipUygulaması.Domain.Entities
+@model StajTakipUygulaması.Domain.Entities.Basvuru
 
 @{
     ViewBag.Title = "Başvuru Detayı";
@@ -138,7 +138,7 @@
                     </thead>
                     <tbody>
                     @{
-                        var tipler = (ViewBag.BelgeTipleri as List<StajTakipUygulaması.Models.BelgeTipi> ?? new())
+                        var tipler = (ViewBag.BelgeTipleri as List<StajTakipUygulaması.Domain.Entities.BelgeTipi> ?? new())
                                      .Take(10);
                         foreach (var tip in tipler)
                         {

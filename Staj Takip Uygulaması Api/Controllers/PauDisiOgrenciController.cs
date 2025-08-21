@@ -5,7 +5,8 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using StajTakipUygulaması.Models; // OgrenciViewModel için (varsa)
-using StajTakipUygulaması.Application.DTOs; // StajyerCreateDto vs.
+using StajTakipUygulaması.Application.DTOs;
+using StajTakipUygulaması.Domain.Entities; // StajyerCreateDto vs.
 
 namespace StajTakipUygulamasi.Web.Controllers
 {

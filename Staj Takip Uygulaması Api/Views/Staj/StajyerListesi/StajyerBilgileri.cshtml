@@ -1,4 +1,4 @@
-@model StajTakipUygulaması.Models.Staj
+@model StajTakipUygulaması.Domain.Entities.Staj
 
 @{
     ViewBag.Title = "Stajyer Bilgileri";
@@ -67,7 +67,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var tip in ViewBag.BelgeTipleri as List<StajTakipUygulaması.Models.BelgeTipi>)
+                        @foreach (var tip in ViewBag.BelgeTipleri as List<StajTakipUygulaması.Domain.Entities.BelgeTipi>)
                         {
                             var belge = Model.Belgeler?.FirstOrDefault(b => b.BelgeTipiID == tip.ID);
                             <tr>

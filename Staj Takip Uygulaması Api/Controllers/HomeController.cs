@@ -1,8 +1,8 @@
-using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using Staj_Takip_Uygulaması_Api.Models;
+using StajTakipUygulaması.Models;
+using System.Diagnostics;
 
-namespace Staj_Takip_Uygulaması_Api.Controllers
+namespace StajTakipUygulaması.Controllers
 {
     public class HomeController : Controller
     {

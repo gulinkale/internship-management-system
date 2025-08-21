@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Staj Takip Uygulaması")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6eb611dcc582699e510dba8d3d739f1471b663e0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c73d7106176034e3941f2faa5a73fd5876055def")]
 [assembly: System.Reflection.AssemblyProductAttribute("Staj Takip Uygulaması")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Staj Takip Uygulaması")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
