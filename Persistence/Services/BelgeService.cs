@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using StajTakipUygulaması.Application.DTOs;
-using StajTakipUygulaması.Application.Interface;
+using StajTakipUygulaması.Application.Interfaces;
 using StajTakipUygulaması.Data;            // StajContext
 using StajTakipUygulaması.Models;          // Belge, BelgeTipi entity'leri
 

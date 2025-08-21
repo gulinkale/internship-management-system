@@ -2,6 +2,7 @@
 using StajTakipUygulaması.Data;
 using StajTakipUygulaması.Application.DTOs;
 using StajTakipUygulaması.Models;
+using StajTakipUygulaması.Application.Interfaces;
 
 namespace StajTakipUygulaması.Persistence.Services
 {
