@@ -1,42 +1,44 @@
+// Proje: StajTakipUygulamasi.Web
+// Dosya: Controllers/PauDisiOgrenciController.cs
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using StajTakipUygulaması.Application.Interfaces;
-using StajTakipUygulaması.Data;
-using StajTakipUygulaması.Models;
-using System.IO;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using StajTakipUygulaması.Models; // OgrenciViewModel için (varsa)
+using StajTakipUygulaması.Application.DTOs; // StajyerCreateDto vs.
 
-namespace StajTakipUygulaması.Controllers
+namespace StajTakipUygulamasi.Web.Controllers
 {
     public class PauDisiOgrenciController : Controller
     {
-        private readonly IStajyerService _stajyerService;
-        private readonly StajContext _context;
+        private readonly HttpClient _http;
+        public PauDisiOgrenciController(IHttpClientFactory f) => _http = f.CreateClient("Api");
 
-        public PauDisiOgrenciController(IStajyerService stajyerService, StajContext context)
-        {
-            _stajyerService = stajyerService;
-            _context = context;
-        }
-
-        // 🔍 Detay
+        // 🔍 Detay (UI sadece API'den çeker)
         public async Task<IActionResult> Details(int id)
         {
-            var stajyer = await _stajyerService.GetByIdAsync(id);
-            if (stajyer == null) return NotFound();
+            var resp = await _http.GetAsync($"api/stajyer/{id}");
+            if (!resp.IsSuccessStatusCode) return NotFound();
+
+            var stajyer = await resp.Content.ReadFromJsonAsync<StajyerDto>();
             return View(stajyer);
         }
 
         // 📄 Form (GET)
-         public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            ViewBag.StajTurleri = _context.StajTurleri
-                .Select(st => new SelectListItem
-                {
-                    Value = st.ID.ToString(),
-                    Text = st.Ad
-                }).ToList();
+            // Staj türleri dropdown (Api'den)
+            var turlerResp = await _http.GetAsync("api/stajturu");
+            var turler = turlerResp.IsSuccessStatusCode
+                ? await turlerResp.Content.ReadFromJsonAsync<List<dynamic>>()
+                : new List<dynamic>();
 
-            // Eğer TempData varsa ViewBag’e aktar
+            ViewBag.StajTurleri = (turler ?? new List<dynamic>()).Select(st => new SelectListItem
+            {
+                Value = ((int)st.id).ToString(),
+                Text = (string)st.ad
+            }).ToList();
+
             if (TempData["Mesaj"] != null)
                 ViewBag.Mesaj = TempData["Mesaj"];
 
@@ -48,80 +50,113 @@ namespace StajTakipUygulaması.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(OgrenciViewModel model)
         {
-            // Güvenlik için null kontrolü
             model.Stajyer ??= new Stajyer();
             model.Staj ??= new Staj();
 
             if (!ModelState.IsValid)
             {
-                ViewBag.StajTurleri = _context.StajTurleri
-                    .Select(st => new SelectListItem
-                    {
-                        Value = st.ID.ToString(),
-                        Text = st.Ad
-                    }).ToList();
+                // Dropdown'ı yeniden doldur
+                var turlerResp = await _http.GetAsync("api/stajturu");
+                var turler = turlerResp.IsSuccessStatusCode
+                    ? await turlerResp.Content.ReadFromJsonAsync<List<dynamic>>()
+                    : new List<dynamic>();
+
+                ViewBag.StajTurleri = (turler ?? new List<dynamic>()).Select(st => new SelectListItem
+                {
+                    Value = ((int)st.id).ToString(),
+                    Text = (string)st.ad
+                }).ToList();
 
                 return View(model);
             }
 
-            // 1. Stajyer kayıt
-            _context.Stajyerler.Add(model.Stajyer);
-            await _stajyerService.AddAsync(model.Stajyer);
-
-            // 2. Staj kayıt
-            model.Staj.StajyerID = model.Stajyer.ID;
-            _context.Stajlar.Add(model.Staj);
-            await _context.SaveChangesAsync();
-
-            // 3. Belgeler
-            var belgeler = new List<IFormFile?> {
-                model.OgrenciBelgesi,
-                model.Transkript,
-                model.BasvuruFormu,
-                model.Taahutname,
-                model.Referans
-            };
-
-            string[] belgeAdlari = {
-                "Öğrenci Belgesi",
-                "Transkript",
-                "Başvuru Formu",
-                "Taahhütname",
-                "Referans Mektubu"
-            };
-
-            for (int i = 0; i < belgeler.Count; i++)
+            // 1) Stajyer kayıt (API)
+            var createDto = new StajyerCreateDto
             {
-                var file = belgeler[i];
-                if (file != null)
+                Universite = model.Stajyer.Universite,
+                OgrenciNo = model.Stajyer.OgrenciNo,
+                Bolum = model.Stajyer.Bolum,
+                Fakulte = model.Stajyer.Fakulte,
+                BaslamaYili = model.Stajyer.BaslamaYili,
+                Sinif = model.Stajyer.Sinif,
+                PAU_ogrencisi_mi = false, // PAÜ dışı
+                Ad = model.Stajyer.Ad,
+                Soyad = model.Stajyer.Soyad,
+                TCKimlikNo = model.Stajyer.TCKimlikNo,
+                DogumTarihi = model.Stajyer.DogumTarihi,
+                Cinsiyet = model.Stajyer.Cinsiyet,
+                TelNo = model.Stajyer.TelNo,
+                Email = model.Stajyer.Email,
+                Adres = model.Stajyer.Adres
+            };
+
+            var stajyerResp = await _http.PostAsJsonAsync("api/stajyer", createDto);
+            if (!stajyerResp.IsSuccessStatusCode)
+            {
+                TempData["Mesaj"] = "Stajyer kaydı başarısız.";
+                return RedirectToAction(nameof(Create));
+            }
+
+            var stajyer = await stajyerResp.Content.ReadFromJsonAsync<StajyerDto>();
+            var stajyerId = stajyer!.ID;
+
+            // 2) Staj kayıt (API)
+            var stajCreate = new
+            {
+                StajyerID = stajyerId,
+                StajTuruID = model.Staj.StajTuruID,
+                BaslamaTarihi = model.Staj.BaslamaTarihi,
+                BitisTarihi = model.Staj.BitisTarihi,
+                Departman = model.Staj.Departman,
+                SorumluID = model.Staj.SorumluID,
+                Yetkiler = model.Staj.Yetkiler
+            };
+
+            var stajResp = await _http.PostAsJsonAsync("api/staj", stajCreate);
+            if (!stajResp.IsSuccessStatusCode)
+            {
+                TempData["Mesaj"] = "Staj kaydı başarısız.";
+                return RedirectToAction(nameof(Create));
+            }
+            var stajObj = await stajResp.Content.ReadFromJsonAsync<dynamic>();
+            int stajId = (int)stajObj!.id;
+
+            // 3) Belgeler (her dosya için /api/belge/upload)
+            var belgeler = new List<(IFormFile? file, string ad, int belgeTipId)>
+            {
+                (model.OgrenciBelgesi, "Öğrenci Belgesi", 1),
+                (model.Transkript,     "Transkript",       2),
+                (model.BasvuruFormu,   "Başvuru Formu",    3),
+                (model.Taahutname,     "Taahhütname",      4),
+                (model.Referans,       "Referans Mektubu", 5)
+            };
+
+            foreach (var (file, ad, belgeTipiId) in belgeler)
+            {
+                if (file is null) continue;
+
+                using var content = new MultipartFormDataContent();
+                var stream = file.OpenReadStream();
+                var fileContent = new StreamContent(stream);
+                fileContent.Headers.ContentType =
+                    new MediaTypeHeaderValue(file.ContentType ?? "application/octet-stream");
+
+                content.Add(fileContent, "dosya", file.FileName);
+                content.Add(new StringContent(stajId.ToString()), "stajId");
+                content.Add(new StringContent(belgeTipiId.ToString()), "belgeTipId");
+                content.Add(new StringContent(""), "aciklama");
+
+                var uploadResp = await _http.PostAsync("api/belge/upload", content);
+                if (!uploadResp.IsSuccessStatusCode)
                 {
-                    string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "belgeler");
-                    Directory.CreateDirectory(uploadsFolder);
-
-                    string uniqueName = Guid.NewGuid() + "_" + file.FileName;
-                    string filePath = Path.Combine(uploadsFolder, uniqueName);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
-                    }
-
-                    _context.Belgeler.Add(new Belge
-                    {
-                        BelgeAdı = belgeAdlari[i],
-                        Yolu = "/belgeler/" + uniqueName,
-                        Açıklama = "",
-                        StajID = model.Staj.ID,
-                        BelgeTipiID = i + 1
-                    });
+                    TempData["Mesaj"] = $"Belge yükleme başarısız: {ad}";
+                    // hata olsa bile diğerlerine devam etmek istersen burada continue;
+                    // yoksa return RedirectToAction(...) deyip kesebilirsin
                 }
             }
 
-            await _context.SaveChangesAsync();
-
-            // 🎉 Başarı mesajı göstermek için ViewBag
             ViewBag.Mesaj = "PAÜ Dışı Öğrenci başarıyla kaydedildi.";
-            ModelState.Clear(); // form temizliği
+            ModelState.Clear();
             return View(new OgrenciViewModel());
         }
     }

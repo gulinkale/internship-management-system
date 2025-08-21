@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Application.DTOs
+namespace StajTakipUygulaması.Application.DTOs
 {
     public class StajListDto
     {

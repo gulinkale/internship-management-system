@@ -1,73 +1,74 @@
-using StajTakipUygulaması.Services.Interfaces;
+// Proje: StajTakipUygulaması.Web
+// Dosya: Controllers/StajController.cs
 using Microsoft.AspNetCore.Mvc;
+using System.Net.Http.Json;
 using StajTakipUygulaması.Models;
 
-
-namespace StajTakipUygulaması.Controllers
+namespace StajTakipUygulaması.Web.Controllers
 {
     public class StajController : Controller
     {
-        private readonly IStajService _stajService;
-        private readonly IBelgeTipiService _belgeTipiService;
+        private readonly HttpClient _http;
+        public StajController(IHttpClientFactory f) => _http = f.CreateClient("Api");
 
-
-        public StajController(IStajService stajService, IBelgeTipiService belgeTipiService)
-        {
-            _stajService = stajService;
-            _belgeTipiService = belgeTipiService;
-        }
-
-        // Listeleme (isteğe bağlı)
+        // GET /Staj
         public async Task<IActionResult> Index()
         {
-            var stajlar = await _stajService.GetAllAsync();
-            return View(stajlar);
+            var resp = await _http.GetAsync("api/staj");
+            if (!resp.IsSuccessStatusCode) return View(new List<Staj>());
+            var data = await resp.Content.ReadFromJsonAsync<List<Staj>>();
+            return View(data!);
         }
 
-        // Kayıt Ekleme (POST)
+        // POST /Staj/Create   (formdan Staj gelir)
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Staj staj)
         {
-            if (ModelState.IsValid)
-            {
-                await _stajService.AddAsync(staj);
-                return RedirectToAction("Index");
-            }
+            if (!ModelState.IsValid) return View(staj);
 
-            return View(staj);
+            var resp = await _http.PostAsJsonAsync("api/staj", staj);
+            if (!resp.IsSuccessStatusCode)
+            {
+                TempData["Hata"] = "Staj kaydı başarısız.";
+                return View(staj);
+            }
+            return RedirectToAction(nameof(Index));
         }
 
-        // Aktif Stajlar (BitisTarihi bugünden sonra olanlar)
+        // GET /Staj/Aktif
         public async Task<IActionResult> Aktif()
         {
-            var stajlar = await _stajService.GetAktifStajlarAsync();
-            return View("StajyerListesi/Aktif", stajlar);
+            var resp = await _http.GetAsync("api/staj/aktif");
+            var data = resp.IsSuccessStatusCode
+                ? await resp.Content.ReadFromJsonAsync<List<Staj>>() : new List<Staj>();
+            return View("StajyerListesi/Aktif", data!);
         }
 
-        // Tamamlanmış Stajlar (BitisTarihi bugünden önce olanlar)
+        // GET /Staj/Tamamlanmıs
         public async Task<IActionResult> Tamamlanmıs()
         {
-            var stajlar = await _stajService.GetTamamlanmisStajlarAsync();
-            return View("StajyerListesi/Tamamlanmıs", stajlar);
+            var resp = await _http.GetAsync("api/staj/tamamlanmis");
+            var data = resp.IsSuccessStatusCode
+                ? await resp.Content.ReadFromJsonAsync<List<Staj>>() : new List<Staj>();
+            return View("StajyerListesi/Tamamlanmıs", data!);
         }
 
-        //Stajyer Detay ekranı
+        // GET /Staj/Details/5
         public async Task<IActionResult> Details(int id)
         {
-            var staj = await _stajService.GetByIdAsync(id);
+            var stajResp = await _http.GetAsync($"api/staj/{id}");
+            if (!stajResp.IsSuccessStatusCode) return NotFound();
+            var staj = await stajResp.Content.ReadFromJsonAsync<Staj>();
 
-            if (staj == null)
-                return NotFound();
-            
-            // Tüm belge tiplerini al (servisten)
-            var belgeTipleri = await _belgeTipiService.GetAllAsync();
-            ViewBag.BelgeTipleri = belgeTipleri;
+            // Belge tipleri (dropdown vb.)
+            var tipResp = await _http.GetAsync("api/belgetipi");
+            var tipler = tipResp.IsSuccessStatusCode
+                ? await tipResp.Content.ReadFromJsonAsync<List<dynamic>>() : new List<dynamic>();
+            ViewBag.BelgeTipleri = tipler;
 
-            // Explicit olarak doğru yolu belirtiyoruz:
-            return View("~/Views/Staj/StajyerListesi/StajyerBilgileri.cshtml", staj);
+            // Eski view yolunu koruyalım:
+            return View("~/Views/Staj/StajyerListesi/StajyerBilgileri.cshtml", staj!);
         }
-
-
     }
 }

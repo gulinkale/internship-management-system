@@ -1,4 +1,4 @@
-﻿namespace Application.DTOs
+﻿namespace StajTakipUygulaması.Application.DTOs
 {
     public class BasvuruBelgeListDto
     {

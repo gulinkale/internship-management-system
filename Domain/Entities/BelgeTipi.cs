@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
 
 using System.ComponentModel.DataAnnotations;
-namespace StajTakipUygulaması.Models
+namespace StajTakipUygulaması.Domain.Entities
 {
     public class BelgeTipi
     {

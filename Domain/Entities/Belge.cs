@@ -2,7 +2,7 @@
 
 using System.ComponentModel.DataAnnotations;
 
-namespace StajTakipUygulaması.Models
+namespace StajTakipUygulaması.Domain.Entities
 {
     public class Belge
     {

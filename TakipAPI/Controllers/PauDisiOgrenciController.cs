@@ -1,128 +1,139 @@
+using StajTakipUygulaması.Domain.Entities;
+// Proje: TakipAPI (StajTakipUygulaması.Api)
+// Dosya: Controllers/PauDisiOgrenciController.cs
+
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using StajTakipUygulaması.Application.Interfaces;
-using StajTakipUygulaması.Data;
-using StajTakipUygulaması.Models;
-using System.IO;
+using System.IO; // <-- MemoryStream için
 
-namespace StajTakipUygulaması.Controllers
+// Alias'lar: doğru katmanları netleştiriyoruz
+using AppDtos = StajTakipUygulaması.Application.DTOs;        // StajyerCreateDto, BelgeUploadRequest
+using AppSvcs = StajTakipUygulaması.Application.Interfaces;  // IStajyerService, IStajService, IBelgeService
+
+// DİKKAT: Entity'lerin gerçek namespace'ine göre EN AZ BİRİNİ aktif bırak
+// using Domain = StajTakipUygulaması.Models;   // Türkçe "ı" ile olan proje ise bu satır
+//using Domain = StajTakipUygulaması.Models; // ASCII ile olan proje ise bu satır
+
+
+namespace StajTakipUygulaması.Api.Controllers
 {
-    public class PauDisiOgrenciController : Controller
+    [ApiController]
+    [Route("api/[controller]")]
+    [Consumes("multipart/form-data")]
+    public class PauDisiOgrenciController : ControllerBase
     {
-        private readonly IStajyerService _stajyerService;
-        private readonly StajContext _context;
+        private readonly AppSvcs.IStajyerService _stajyerService;
+        private readonly AppSvcs.IStajService _stajService;
+        private readonly AppSvcs.IBelgeService _belgeService;
 
-        public PauDisiOgrenciController(IStajyerService stajyerService, StajContext context)
+        public PauDisiOgrenciController(
+            AppSvcs.IStajyerService stajyerService,
+            AppSvcs.IStajService stajService,
+            AppSvcs.IBelgeService belgeService)
         {
             _stajyerService = stajyerService;
-            _context = context;
+            _stajService = stajService;
+            _belgeService = belgeService;
         }
 
-        // 🔍 Detay
-        public async Task<IActionResult> Details(int id)
+        [HttpPost("create")]
+        [RequestSizeLimit(100_000_000)]
+        public async Task<IActionResult> Create(
+            // --- Stajyer ---
+            [FromForm] string Universite,
+            [FromForm] string OgrenciNo,
+            [FromForm] string Bolum,
+            [FromForm] string Fakulte,
+            [FromForm] DateTime BaslamaYili,  // DTO ile uyumlu: DateTime
+            [FromForm] string Sinif,          // DTO ile uyumlu: string
+            [FromForm] string Ad,
+            [FromForm] string Soyad,
+            [FromForm] string TCKimlikNo,
+            [FromForm] DateTime DogumTarihi,
+            [FromForm] string Cinsiyet,
+            [FromForm] string TelNo,
+            [FromForm] string Email,
+            [FromForm] string Adres,
+
+            // --- Staj ---
+            [FromForm] int StajTuruID,
+            [FromForm] DateTime BaslamaTarihi,
+            [FromForm] DateTime BitisTarihi,
+            [FromForm] string? Departman,
+            [FromForm] string? SorumluID,
+            [FromForm] string? Yetkiler,
+
+            // --- Belgeler (opsiyonel) ---
+            [FromForm] IFormFile? OgrenciBelgesi,
+            [FromForm] IFormFile? Transkript,
+            [FromForm] IFormFile? BasvuruFormu,
+            [FromForm] IFormFile? Taahutname,
+            [FromForm] IFormFile? Referans
+        )
         {
-            var stajyer = await _stajyerService.GetByIdAsync(id);
-            if (stajyer == null) return NotFound();
-            return View(stajyer);
-        }
-
-        // 📄 Form (GET)
-         public IActionResult Create()
-        {
-            ViewBag.StajTurleri = _context.StajTurleri
-                .Select(st => new SelectListItem
-                {
-                    Value = st.ID.ToString(),
-                    Text = st.Ad
-                }).ToList();
-
-            // Eğer TempData varsa ViewBag’e aktar
-            if (TempData["Mesaj"] != null)
-                ViewBag.Mesaj = TempData["Mesaj"];
-
-            return View(new OgrenciViewModel());
-        }
-
-        // 📝 Form (POST)
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(OgrenciViewModel model)
-        {
-            // Güvenlik için null kontrolü
-            model.Stajyer ??= new Stajyer();
-            model.Staj ??= new Staj();
-
-            if (!ModelState.IsValid)
+            // 1) Stajyer → StajyerCreateDto ile ekle (service ID döndürür)
+            var stajyerCreate = new AppDtos.StajyerCreateDto
             {
-                ViewBag.StajTurleri = _context.StajTurleri
-                    .Select(st => new SelectListItem
-                    {
-                        Value = st.ID.ToString(),
-                        Text = st.Ad
-                    }).ToList();
+                Universite = Universite,
+                OgrenciNo = OgrenciNo,
+                Bolum = Bolum,
+                Fakulte = Fakulte,
+                BaslamaYili = BaslamaYili,
+                Sinif = Sinif,
+                PAU_ogrencisi_mi = false,
+                Ad = Ad,
+                Soyad = Soyad,
+                TCKimlikNo = TCKimlikNo,
+                DogumTarihi = DogumTarihi,
+                Cinsiyet = Cinsiyet,
+                TelNo = TelNo,
+                Email = Email,
+                Adres = Adres
+            };
+            var stajyerId = await _stajyerService.AddAsync(stajyerCreate);
 
-                return View(model);
+            // 2) Staj → IStajService.AddAsync(Staj) entity bekliyor
+            var staj = new Staj
+            {
+                StajyerID = stajyerId,
+                StajTuruID = StajTuruID,
+                BaslamaTarihi = BaslamaTarihi,
+                BitisTarihi = BitisTarihi,
+                Departman = Departman,
+                SorumluID = SorumluID,
+                Yetkiler = Yetkiler
+            };
+            await _stajService.AddAsync(staj);
+            var stajId = staj.ID; // SaveChanges sonrası dolu
+
+            // 3) Belgeler → IBelgeService.UploadAndSaveAsync(Stream...)
+            var belgeIds = new List<int>();
+
+            async Task TryUploadAsync(IFormFile? file, int belgeTipiId)
+            {
+                if (file is null) return;
+                using var ms = new MemoryStream();
+                await file.CopyToAsync(ms);
+                ms.Position = 0; // Stream başına al
+
+                var req = new AppDtos.BelgeUploadRequest
+                {
+                    Content = ms,
+                    OriginalFileName = file.FileName,
+                    BelgeTipiID = belgeTipiId,
+                    StajID = stajId
+                };
+                var id = await _belgeService.UploadAndSaveAsync(req);
+                belgeIds.Add(id);
             }
 
-            // 1. Stajyer kayıt
-            _context.Stajyerler.Add(model.Stajyer);
-            await _stajyerService.AddAsync(model.Stajyer);
+            await TryUploadAsync(OgrenciBelgesi, 1);
+            await TryUploadAsync(Transkript, 2);
+            await TryUploadAsync(BasvuruFormu, 3);
+            await TryUploadAsync(Taahutname, 4);
+            await TryUploadAsync(Referans, 5);
 
-            // 2. Staj kayıt
-            model.Staj.StajyerID = model.Stajyer.ID;
-            _context.Stajlar.Add(model.Staj);
-            await _context.SaveChangesAsync();
-
-            // 3. Belgeler
-            var belgeler = new List<IFormFile?> {
-                model.OgrenciBelgesi,
-                model.Transkript,
-                model.BasvuruFormu,
-                model.Taahutname,
-                model.Referans
-            };
-
-            string[] belgeAdlari = {
-                "Öğrenci Belgesi",
-                "Transkript",
-                "Başvuru Formu",
-                "Taahhütname",
-                "Referans Mektubu"
-            };
-
-            for (int i = 0; i < belgeler.Count; i++)
-            {
-                var file = belgeler[i];
-                if (file != null)
-                {
-                    string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "belgeler");
-                    Directory.CreateDirectory(uploadsFolder);
-
-                    string uniqueName = Guid.NewGuid() + "_" + file.FileName;
-                    string filePath = Path.Combine(uploadsFolder, uniqueName);
-
-                    using (var stream = new FileStream(filePath, FileMode.Create))
-                    {
-                        await file.CopyToAsync(stream);
-                    }
-
-                    _context.Belgeler.Add(new Belge
-                    {
-                        BelgeAdı = belgeAdlari[i],
-                        Yolu = "/belgeler/" + uniqueName,
-                        Açıklama = "",
-                        StajID = model.Staj.ID,
-                        BelgeTipiID = i + 1
-                    });
-                }
-            }
-
-            await _context.SaveChangesAsync();
-
-            // 🎉 Başarı mesajı göstermek için ViewBag
-            ViewBag.Mesaj = "PAÜ Dışı Öğrenci başarıyla kaydedildi.";
-            ModelState.Clear(); // form temizliği
-            return View(new OgrenciViewModel());
+            return Created(string.Empty, new { stajyerId, stajId, belgeler = belgeIds });
         }
     }
 }

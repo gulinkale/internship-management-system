@@ -11,3 +11,4 @@ namespace StajTakipUygulaması.Application.Interfaces
         Task DeleteAsync(int id);
     }
 }
+

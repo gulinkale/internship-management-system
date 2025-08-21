@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Application.DTOs
+namespace StajTakipUygulaması.Application.DTOs
 {
     public class BasvuruDto
     {

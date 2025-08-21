@@ -1,73 +1,65 @@
-using StajTakipUygulaması.Services.Interfaces;
+// Proje: StajTakipUygulaması.Api
+// Dosya: Controllers/StajController.cs
 using Microsoft.AspNetCore.Mvc;
-using StajTakipUygulaması.Models;
+using StajTakipUygulaması.Application.Interfaces; // IStajService
+using StajTakipUygulaması.Models;                // Staj entity
 
-
-namespace StajTakipUygulaması.Controllers
+namespace StajTakipUygulaması.Api.Controllers
 {
-    public class StajController : Controller
+    [ApiController]
+    [Route("api/[controller]")]
+    public class StajController : ControllerBase
     {
-        private readonly IStajService _stajService;
-        private readonly IBelgeTipiService _belgeTipiService;
+        private readonly IStajService _svc;
+        public StajController(IStajService svc) => _svc = svc;
 
+        // GET api/staj
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<Staj>>> GetAll()
+            => Ok(await _svc.GetAllAsync());
 
-        public StajController(IStajService stajService, IBelgeTipiService belgeTipiService)
+        // GET api/staj/aktif
+        [HttpGet("aktif")]
+        public async Task<ActionResult<IEnumerable<Staj>>> GetAktif()
+            => Ok(await _svc.GetAktifStajlarAsync());
+
+        // GET api/staj/tamamlanmis
+        [HttpGet("tamamlanmis")]
+        public async Task<ActionResult<IEnumerable<Staj>>> GetTamamlanmis()
+            => Ok(await _svc.GetTamamlanmisStajlarAsync());
+
+        // GET api/staj/5
+        [HttpGet("{id:int}")]
+        public async Task<ActionResult<Staj>> Get(int id)
         {
-            _stajService = stajService;
-            _belgeTipiService = belgeTipiService;
+            var s = await _svc.GetByIdAsync(id);
+            return s is null ? NotFound() : Ok(s);
         }
 
-        // Listeleme (isteğe bağlı)
-        public async Task<IActionResult> Index()
-        {
-            var stajlar = await _stajService.GetAllAsync();
-            return View(stajlar);
-        }
-
-        // Kayıt Ekleme (POST)
+        // POST api/staj   (body: Staj)
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Staj staj)
+        public async Task<ActionResult<object>> Create([FromBody] Staj staj)
         {
-            if (ModelState.IsValid)
-            {
-                await _stajService.AddAsync(staj);
-                return RedirectToAction("Index");
-            }
-
-            return View(staj);
+            if (staj is null) return BadRequest("Geçersiz istek.");
+            await _svc.AddAsync(staj);
+            return CreatedAtAction(nameof(Get), new { id = staj.ID }, new { id = staj.ID });
         }
 
-        // Aktif Stajlar (BitisTarihi bugünden sonra olanlar)
-        public async Task<IActionResult> Aktif()
+        // PUT api/staj/5   (body: Staj)
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Update(int id, [FromBody] Staj staj)
         {
-            var stajlar = await _stajService.GetAktifStajlarAsync();
-            return View("StajyerListesi/Aktif", stajlar);
+            if (staj is null || staj.ID != id) return BadRequest("Geçersiz istek.");
+            await _svc.UpdateAsync(staj);
+            return NoContent();
         }
 
-        // Tamamlanmış Stajlar (BitisTarihi bugünden önce olanlar)
-        public async Task<IActionResult> Tamamlanmıs()
+        // DELETE api/staj/5
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
         {
-            var stajlar = await _stajService.GetTamamlanmisStajlarAsync();
-            return View("StajyerListesi/Tamamlanmıs", stajlar);
+            await _svc.DeleteAsync(id);
+            return NoContent();
         }
-
-        //Stajyer Detay ekranı
-        public async Task<IActionResult> Details(int id)
-        {
-            var staj = await _stajService.GetByIdAsync(id);
-
-            if (staj == null)
-                return NotFound();
-            
-            // Tüm belge tiplerini al (servisten)
-            var belgeTipleri = await _belgeTipiService.GetAllAsync();
-            ViewBag.BelgeTipleri = belgeTipleri;
-
-            // Explicit olarak doğru yolu belirtiyoruz:
-            return View("~/Views/Staj/StajyerListesi/StajyerBilgileri.cshtml", staj);
-        }
-
-
     }
 }

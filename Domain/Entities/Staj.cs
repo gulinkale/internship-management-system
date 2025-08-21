@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
 
-namespace StajTakipUygulaması.Models
+namespace StajTakipUygulaması.Domain.Entities
 {
     public class Staj
     {

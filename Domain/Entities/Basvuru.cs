@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace StajTakipUygulaması.Models
+namespace StajTakipUygulaması.Domain.Entities
 {
     public enum BasvuruDurumu { Beklemede = 0, Onaylandi = 1, Reddedildi = 2 }
     public class Basvuru

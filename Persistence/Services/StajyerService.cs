@@ -4,7 +4,7 @@ using StajTakipUygulaması.Application.Interfaces;
 using StajTakipUygulaması.Data;
 using StajTakipUygulaması.Models;
 
-namespace StajTakipUygulaması.Persistence.Services
+namespace StajTakipUygulaması.Infrastructure.Services
 {
     public class StajyerService : IStajyerService
     {

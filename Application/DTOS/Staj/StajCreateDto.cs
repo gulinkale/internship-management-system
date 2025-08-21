@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Application.DTOs
+namespace StajTakipUygulaması.Application.DTOs
 {
     public class StajCreateDto
     {

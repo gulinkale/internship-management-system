@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StajTakipUygulaması.Data;
 using StajTakipUygulaması.Models;
-using StajTakipUygulaması.Services.Interfaces;
+using StajTakipUygulaması.Application.Interfaces;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace Infrastructure.Services
+namespace StajTakipUygulaması.Infrastructure.Services
 {
     public class StajService : IStajService
     {

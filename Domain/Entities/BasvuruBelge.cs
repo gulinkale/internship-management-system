@@ -1,8 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
-using StajTakipUygulaması.Models;
+using StajTakipUygulaması.Domain.Entities;
 using System.ComponentModel.DataAnnotations;
-
-namespace StajTakipUygulaması.Models
+namespace StajTakipUygulaması.Domain.Entities
 {
     public class BasvuruBelge
     {

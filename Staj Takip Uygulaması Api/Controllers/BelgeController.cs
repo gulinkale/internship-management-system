@@ -1,163 +1,117 @@
+// Proje: StajTakipUygulamasi.Web
+// Dosya: Controllers/BelgeController.cs
 using Microsoft.AspNetCore.Mvc;
-using StajTakipUygulaması.Application.Interfaces;
-using StajTakipUygulaması.Data;
-using StajTakipUygulaması.Models;
-using System.IO;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
 
-namespace StajTakipUygulaması.Controllers
+namespace StajTakipUygulamasi.Web.Controllers
 {
     public class BelgeController : Controller
     {
-        private readonly IBelgeService _belgeService;
-        private readonly IStajService _stajService;
-        private readonly IBelgeTipiService _belgeTipiService;
-        private readonly StajContext _context;
+        private readonly HttpClient _http;
+        public BelgeController(IHttpClientFactory f) => _http = f.CreateClient("Api");
 
-        public BelgeController(
-            IBelgeService belgeService,
-            IStajService stajService,
-            IBelgeTipiService belgeTipiService,
-            StajContext context)
+        // İlgili stajın belgeleri (opsiyonel)
+        [HttpGet]
+        public async Task<IActionResult> Index(int stajId)
         {
-            _belgeService = belgeService;
-            _stajService = stajService;
-            _belgeTipiService = belgeTipiService;
-            _context = context;
+            var resp = await _http.GetAsync($"api/belge?stajId={stajId}");
+            if (!resp.IsSuccessStatusCode)
+            {
+                TempData["Hata"] = "Belge listesi alınamadı.";
+                return View(new List<object>());
+            }
+            var data = await resp.Content.ReadFromJsonAsync<List<dynamic>>();
+            ViewBag.StajId = stajId;
+            return View(data!);
         }
 
-        // ✅ Belge Listeleme
-        public async Task<IActionResult> Index()
-        {
-            var belgeler = await _belgeService.GetAllAsync();
-            return View(belgeler);
-        }
-
-        // ✅ Belge Yükleme (GET) — tek kaynak burası
+        // Yükle (GET) — sadece form
         [HttpGet]
         public IActionResult Yukle(int stajId, int belgeTipId, string? returnUrl)
         {
-            var model = new Belge { StajID = stajId, BelgeTipiID = belgeTipId };
-
-            ViewBag.BelgeTipAd = _context.BelgeTipleri
-                                         .Where(x => x.ID == belgeTipId)
-                                         .Select(x => x.Ad)
-                                         .FirstOrDefault();
-
-            // Yükleme sonrası döneceğimiz yer
+            ViewBag.StajId = stajId;
+            ViewBag.BelgeTipId = belgeTipId;
             ViewBag.ReturnUrl = string.IsNullOrWhiteSpace(returnUrl)
                 ? Url.Action("Details", "Staj", new { id = stajId })
                 : returnUrl;
-
-            return View(model); // Views/Belge/Yukle.cshtml
+            return View();
         }
 
-        // ✅ Belge Yükleme (POST) — tek kaynak burası
+        // Yükle (POST) — API'ye multipart gönder
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Yukle(IFormFile dosya, int StajID, int BelgeTipiID, string? Aciklama, string? returnUrl)
         {
-            var belgeTipi = await _context.BelgeTipleri.FindAsync(BelgeTipiID);
-            if (belgeTipi == null)
-            {
-                TempData["Hata"] = "Geçersiz belge tipi seçildi.";
-                return RedirectToAction(nameof(Yukle), new { stajId = StajID, belgeTipId = BelgeTipiID, returnUrl });
-            }
-
             if (dosya == null || dosya.Length == 0)
             {
                 TempData["Hata"] = "Dosya seçilmedi.";
                 return RedirectToAction(nameof(Yukle), new { stajId = StajID, belgeTipId = BelgeTipiID, returnUrl });
             }
 
-            try
+            using var content = new MultipartFormDataContent();
+            var stream = dosya.OpenReadStream();
+            var fileContent = new StreamContent(stream);
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue(dosya.ContentType ?? "application/octet-stream");
+            content.Add(fileContent, "dosya", dosya.FileName);
+            content.Add(new StringContent(StajID.ToString()), "stajId");
+            content.Add(new StringContent(BelgeTipiID.ToString()), "belgeTipId");
+            content.Add(new StringContent(Aciklama ?? ""), "aciklama");
+
+            var resp = await _http.PostAsync("api/belge/upload", content);
+            if (!resp.IsSuccessStatusCode)
             {
-                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "belgeler");
-                Directory.CreateDirectory(uploadsFolder);
-
-                string uniqueName = Guid.NewGuid() + "_" + dosya.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await dosya.CopyToAsync(stream);
-                }
-
-                var yeniBelge = new Belge
-                {
-                    BelgeTipiID = BelgeTipiID,
-                    StajID      = StajID,
-                    Yolu        = "/belgeler/" + uniqueName,        // web yolu
-                    BelgeAdı    = belgeTipi.Ad,                    // tip adından
-                    Açıklama    = string.IsNullOrWhiteSpace(Aciklama) ? "Yüklendi" : Aciklama.Trim()
-                };
-
-                _context.Belgeler.Add(yeniBelge);
-                await _context.SaveChangesAsync();
-
-                TempData["OK"] = "Belge başarıyla yüklendi.";
-
-                // Geldiğimiz yere dön (ör: Rapor/Sonuc) yoksa Staj/Details
-                if (!string.IsNullOrWhiteSpace(returnUrl))
-                    return Redirect(returnUrl);
-
-                return RedirectToAction("Details", "Staj", new { id = StajID });
-            }
-            catch (Exception ex)
-            {
-                TempData["Hata"] = "Hata oluştu: " + ex.Message;
+                TempData["Hata"] = "Yükleme başarısız.";
                 return RedirectToAction(nameof(Yukle), new { stajId = StajID, belgeTipId = BelgeTipiID, returnUrl });
             }
+
+            TempData["OK"] = "Belge başarıyla yüklendi.";
+            if (!string.IsNullOrWhiteSpace(returnUrl)) return Redirect(returnUrl);
+            return RedirectToAction("Details", "Staj", new { id = StajID });
         }
 
-        // ✅ GÜNCELLE (GET)
+        // Güncelle (GET) — mevcut belgeyi getirip form göster
         [HttpGet]
         public async Task<IActionResult> Guncelle(int id, string? returnUrl)
         {
-            var belge = await _belgeService.GetByIdAsync(id);
-            if (belge == null)
-                return NotFound();
+            var resp = await _http.GetAsync($"api/belge/{id}");
+            if (!resp.IsSuccessStatusCode) return NotFound();
 
-            ViewBag.BelgeTipAd = _context.BelgeTipleri.FirstOrDefault(bt => bt.ID == belge.BelgeTipiID)?.Ad;
-            ViewBag.ControllerName = "Belge";
+            var belge = await resp.Content.ReadFromJsonAsync<dynamic>();
             ViewBag.ReturnUrl = string.IsNullOrWhiteSpace(returnUrl)
-                ? Url.Action("Details", "Staj", new { id = belge.StajID })
+                ? Url.Action("Details", "Staj", new { id = (int)belge!.stajID })
                 : returnUrl;
 
-            return View(belge); // Views/Belge/Guncelle.cshtml
+            return View(belge);
         }
 
-        // ✅ GÜNCELLE (POST)
+        // Güncelle (POST) — yeni dosyayı API'ye yükle
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Guncelle(int id, IFormFile yeniDosya, string? returnUrl)
+        public async Task<IActionResult> Guncelle(int id, IFormFile yeniDosya, int stajId, string? returnUrl)
         {
-            var belge = await _belgeService.GetByIdAsync(id);
-            if (belge == null)
-                return NotFound();
-
-            if (yeniDosya != null && yeniDosya.Length > 0)
+            if (yeniDosya == null || yeniDosya.Length == 0)
             {
-                string uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "belgeler");
-                Directory.CreateDirectory(uploadsFolder);
-
-                string uniqueName = Guid.NewGuid() + "_" + yeniDosya.FileName;
-                string filePath = Path.Combine(uploadsFolder, uniqueName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                {
-                    await yeniDosya.CopyToAsync(stream);
-                }
-
-                belge.Yolu = "/belgeler/" + uniqueName;
-                belge.Açıklama = "Güncellendi";
-                await _belgeService.UpdateAsync(belge);
+                TempData["Hata"] = "Dosya seçilmedi.";
+                return RedirectToAction(nameof(Guncelle), new { id, returnUrl });
             }
 
-            // Geldiğimiz yere dön, yoksa Staj/Details
-            if (!string.IsNullOrWhiteSpace(returnUrl))
-                return Redirect(returnUrl);
+            using var content = new MultipartFormDataContent();
+            var stream = yeniDosya.OpenReadStream();
+            var fileContent = new StreamContent(stream);
+            fileContent.Headers.ContentType = new MediaTypeHeaderValue(yeniDosya.ContentType ?? "application/octet-stream");
+            content.Add(fileContent, "yeniDosya", yeniDosya.FileName);
 
-            return RedirectToAction("Details", "Staj", new { id = belge.StajID });
+            var resp = await _http.PutAsync($"api/belge/{id}/file", content);
+            if (!resp.IsSuccessStatusCode)
+            {
+                TempData["Hata"] = "Güncelleme başarısız.";
+                return RedirectToAction(nameof(Guncelle), new { id, returnUrl });
+            }
+
+            TempData["OK"] = "Belge güncellendi.";
+            if (!string.IsNullOrWhiteSpace(returnUrl)) return Redirect(returnUrl);
+            return RedirectToAction("Details", "Staj", new { id = stajId });
         }
     }
 }
