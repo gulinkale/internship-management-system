@@ -1,4 +1,4 @@
-﻿namespace StajTakipUygulamasi.Application.DTOs
+﻿namespace StajTakipUygulaması.Application.DTOs
 {
     public class BelgeTipiDto
     {

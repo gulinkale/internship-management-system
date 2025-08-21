@@ -2,30 +2,35 @@
 using Application.DTOs;
 using StajTakipUygulaması.Models;
 
-public class StajProfile : Profile
+
+namespace StajTakipUygulaması.Application.Mapping
 {
-    public StajProfile()
+
+    public class StajProfile : Profile
     {
-        // LIST
-        CreateMap<Staj, StajListDto>()
-            .ForMember(d => d.StajyerAdSoyad,
-                m => m.MapFrom(s => s.Stajyer != null ? (s.Stajyer.Ad + " " + s.Stajyer.Soyad) : null))
-            .ForMember(d => d.StajTuruAdi,
-                m => m.MapFrom(s => s.StajTuru != null ? s.StajTuru.Ad : null))
-            .ForMember(d => d.AktifMi,
-                m => m.MapFrom(s => s.BitisTarihi >= DateTime.Today));
+        public StajProfile()
+        {
+            // LIST
+            CreateMap<Staj, StajListDto>()
+                .ForMember(d => d.StajyerAdSoyad,
+                    m => m.MapFrom(s => s.Stajyer != null ? (s.Stajyer.Ad + " " + s.Stajyer.Soyad) : null))
+                .ForMember(d => d.StajTuruAdi,
+                    m => m.MapFrom(s => s.StajTuru != null ? s.StajTuru.Ad : null))
+                .ForMember(d => d.AktifMi,
+                    m => m.MapFrom(s => s.BitisTarihi >= DateTime.Today));
 
-        // DETAIL
-        CreateMap<Staj, StajDetailDto>()
-            .ForMember(d => d.StajyerAdSoyad,
-                m => m.MapFrom(s => s.Stajyer != null ? (s.Stajyer.Ad + " " + s.Stajyer.Soyad) : null))
-            .ForMember(d => d.StajTuruAdi,
-                m => m.MapFrom(s => s.StajTuru != null ? s.StajTuru.Ad : null))
-            .ForMember(d => d.AktifMi,
-                m => m.MapFrom(s => s.BitisTarihi >= DateTime.Today));
+            // DETAIL
+            CreateMap<Staj, StajDetailDto>()
+                .ForMember(d => d.StajyerAdSoyad,
+                    m => m.MapFrom(s => s.Stajyer != null ? (s.Stajyer.Ad + " " + s.Stajyer.Soyad) : null))
+                .ForMember(d => d.StajTuruAdi,
+                    m => m.MapFrom(s => s.StajTuru != null ? s.StajTuru.Ad : null))
+                .ForMember(d => d.AktifMi,
+                    m => m.MapFrom(s => s.BitisTarihi >= DateTime.Today));
 
-        // CREATE / UPDATE
-        CreateMap<StajCreateDto, Staj>();
-        CreateMap<StajUpdateDto, Staj>();
+            // CREATE / UPDATE
+            CreateMap<StajCreateDto, Staj>();
+            CreateMap<StajUpdateDto, Staj>();
+        }
     }
 }

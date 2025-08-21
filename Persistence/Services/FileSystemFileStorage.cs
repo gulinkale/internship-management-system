@@ -1,4 +1,4 @@
-﻿using StajTakipUygulamasi.Application.Interfaces;
+﻿using StajTakipUygulaması.Application.Interfaces;
 
 public class FileSystemFileStorage : IFileStorage
 {

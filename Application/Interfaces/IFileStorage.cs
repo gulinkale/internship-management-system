@@ -1,4 +1,4 @@
-﻿namespace StajTakipUygulamasi.Application.Interfaces
+﻿namespace StajTakipUygulaması.Application.Interfaces
 {
     public interface IFileStorage
     {

@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StajTakipUygulaması.Data;
-using StajTakipUygulamasi.Application.DTOs;
+using StajTakipUygulaması.Application.DTOs;
 using StajTakipUygulaması.Models;
 
-namespace StajTakipUygulamasi.Persistence.Services
+namespace StajTakipUygulaması.Persistence.Services
 {
     public class BelgeTipiService : IBelgeTipiService
     {

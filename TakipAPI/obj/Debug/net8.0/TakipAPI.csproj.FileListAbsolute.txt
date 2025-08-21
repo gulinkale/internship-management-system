@@ -6,3 +6,11 @@ C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\TakipAPI\obj\Debug\net8.0
 C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\TakipAPI\obj\Debug\net8.0\TakipAPI.csproj.CoreCompileInputs.cache
 C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\TakipAPI\obj\Debug\net8.0\TakipAPI.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\TakipAPI\obj\Debug\net8.0\TakipAPI.sourcelink.json
+C:\Users\Pau\Desktop\Staj Takip Uygulaması\STU\TakipAPI\obj\Debug\net8.0\TakipAPI.csproj.AssemblyReference.cache
+C:\Users\Pau\Desktop\Staj Takip Uygulaması\STU\TakipAPI\obj\Debug\net8.0\rpswa.dswa.cache.json
+C:\Users\Pau\Desktop\Staj Takip Uygulaması\STU\TakipAPI\obj\Debug\net8.0\TakipAPI.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Pau\Desktop\Staj Takip Uygulaması\STU\TakipAPI\obj\Debug\net8.0\TakipAPI.AssemblyInfoInputs.cache
+C:\Users\Pau\Desktop\Staj Takip Uygulaması\STU\TakipAPI\obj\Debug\net8.0\TakipAPI.AssemblyInfo.cs
+C:\Users\Pau\Desktop\Staj Takip Uygulaması\STU\TakipAPI\obj\Debug\net8.0\TakipAPI.csproj.CoreCompileInputs.cache
+C:\Users\Pau\Desktop\Staj Takip Uygulaması\STU\TakipAPI\obj\Debug\net8.0\TakipAPI.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Pau\Desktop\Staj Takip Uygulaması\STU\TakipAPI\obj\Debug\net8.0\TakipAPI.sourcelink.json

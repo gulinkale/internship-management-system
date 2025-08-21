@@ -1,11 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using StajTakipUygulamasi.Application.DTOs;
-using StajTakipUygulamasi.Application.Interfaces;
+using StajTakipUygulaması.Application.DTOs;
+using StajTakipUygulaması.Application.Interface;
 using StajTakipUygulaması.Data;            // StajContext
 using StajTakipUygulaması.Models;          // Belge, BelgeTipi entity'leri
 
-namespace StajTakipUygulamasi.Infrastructure.Services
+namespace StajTakipUygulaması.Infrastructure.Services
 {
     public class BelgeService : IBelgeService
     {

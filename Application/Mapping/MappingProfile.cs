@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using StajTakipUygulamasi.Application.DTOs;
+using StajTakipUygulaması.Application.DTOs;
 using StajTakipUygulaması.Models; // Entity’lerin bulunduğu namespace
 
-namespace StajTakipUygulamasi.Application.Mapping
+namespace StajTakipUygulaması.Application.Mapping
 {
     public class MappingProfile : Profile
     {

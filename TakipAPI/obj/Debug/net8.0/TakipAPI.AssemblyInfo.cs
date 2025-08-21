@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("TakipAPI")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ec5fde8feaebcb670c0b52b7e48ed451aff6838c")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+be08e85fde1c72e1ae1ab8e3439071c8b562e14f")]
 [assembly: System.Reflection.AssemblyProductAttribute("TakipAPI")]
 [assembly: System.Reflection.AssemblyTitleAttribute("TakipAPI")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

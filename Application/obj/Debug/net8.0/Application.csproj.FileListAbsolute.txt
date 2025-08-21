@@ -4,3 +4,9 @@ C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Application\obj\Debug\net
 C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Application\obj\Debug\net8.0\Application.AssemblyInfo.cs
 C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Application\obj\Debug\net8.0\Application.csproj.CoreCompileInputs.cache
 C:\Users\begumtasci\Desktop\Staj Takip Uygulaması Api\Application\obj\Debug\net8.0\Application.sourcelink.json
+C:\Users\Pau\Desktop\Staj Takip Uygulaması\STU\Application\obj\Debug\net8.0\Application.csproj.AssemblyReference.cache
+C:\Users\Pau\Desktop\Staj Takip Uygulaması\STU\Application\obj\Debug\net8.0\Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Pau\Desktop\Staj Takip Uygulaması\STU\Application\obj\Debug\net8.0\Application.AssemblyInfoInputs.cache
+C:\Users\Pau\Desktop\Staj Takip Uygulaması\STU\Application\obj\Debug\net8.0\Application.AssemblyInfo.cs
+C:\Users\Pau\Desktop\Staj Takip Uygulaması\STU\Application\obj\Debug\net8.0\Application.csproj.CoreCompileInputs.cache
+C:\Users\Pau\Desktop\Staj Takip Uygulaması\STU\Application\obj\Debug\net8.0\Application.sourcelink.json

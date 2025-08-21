@@ -2,7 +2,11 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-public interface IBelgeTipiService
+
+namespace StajTakipUygulaması.Application.Interfaces
 {
-    Task<List<BelgeTipi>> GetAllAsync();
+    public interface IBelgeTipiService
+    {
+        Task<List<BelgeTipi>> GetAllAsync();
+    }
 }

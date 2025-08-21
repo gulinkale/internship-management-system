@@ -2,17 +2,21 @@
 using Application.DTOs;
 using StajTakipUygulaması.Models;
 
-public class StajTuruProfile : Profile
+
+namespace StajTakipUygulaması.Application.Mapping
 {
-    public StajTuruProfile()
+    public class StajTuruProfile : Profile
     {
-        CreateMap<StajTuru, StajTuruListDto>()
-            .ForMember(d => d.StajSayisi, m => m.MapFrom(s => s.Stajlar != null ? s.Stajlar.Count : 0));
+        public StajTuruProfile()
+        {
+            CreateMap<StajTuru, StajTuruListDto>()
+                .ForMember(d => d.StajSayisi, m => m.MapFrom(s => s.Stajlar != null ? s.Stajlar.Count : 0));
 
-        CreateMap<StajTuru, StajTuruDetailDto>()
-            .ForMember(d => d.StajSayisi, m => m.MapFrom(s => s.Stajlar != null ? s.Stajlar.Count : 0));
+            CreateMap<StajTuru, StajTuruDetailDto>()
+                .ForMember(d => d.StajSayisi, m => m.MapFrom(s => s.Stajlar != null ? s.Stajlar.Count : 0));
 
-        CreateMap<StajTuruCreateDto, StajTuru>();
-        CreateMap<StajTuruUpdateDto, StajTuru>();
+            CreateMap<StajTuruCreateDto, StajTuru>();
+            CreateMap<StajTuruUpdateDto, StajTuru>();
+        }
     }
 }

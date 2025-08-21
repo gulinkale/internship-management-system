@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace StajTakipUygulaması.Services.Interfaces
+namespace StajTakipUygulaması.Application.Interfaces
 {
     public interface IStajService
     {

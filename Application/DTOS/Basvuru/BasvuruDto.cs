@@ -46,6 +46,6 @@ namespace Application.DTOs
         public DateTime? RedTarihi { get; set; }
 
         // Belgeler
-        public List<BasvuruBelgeDto> Belgeler { get; set; } = new();
+        public List<BasvuruBelgeListDto> Belgeler { get; set; } = new();
     }
 }

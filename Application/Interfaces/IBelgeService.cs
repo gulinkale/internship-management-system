@@ -1,6 +1,6 @@
-﻿using StajTakipUygulamasi.Application.DTOs;
+﻿using StajTakipUygulaması.Application.DTOs;
 
-namespace StajTakipUygulamasi.Application.Interfaces
+namespace StajTakipUygulaması.Application.Interfaces
 {
     public interface IBelgeService
     {
