@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using StajTakipUygulaması.Domain.Entities;
 using StajTakipUygulamasi.Application.DTOs.BasvuruBelge;
 
-namespace StajTakipUygulamas.Persistence.Services
+namespace StajTakipUygulaması.Infrastructure.Services
 {
     public class BasvuruService : IBasvuruService
     {

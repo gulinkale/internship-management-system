@@ -12,3 +12,6 @@ obj/
 
 # Diğer
 *.log
+.vs/
+*/obj/
+*/bin/

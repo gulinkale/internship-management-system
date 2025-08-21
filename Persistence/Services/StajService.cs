@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace StajTakipUygulamasi.Infrastructure.Services
+namespace StajTakipUygulaması.Infrastructure.Services
 {
     public class StajService : IStajService
     {
