@@ -70,44 +70,38 @@ namespace StajTakipUygulaması.Api.Controllers
         /// multipart/form-data: dosya, stajId, belgeTipId, aciklama
         /// </summary>
         [HttpPost("upload")]
-        [RequestSizeLimit(100_000_000)] // 100 MB örnek
-        public async Task<ActionResult<object>> Upload(
-            [FromForm] IFormFile dosya,
-            [FromForm] int stajId,
-            [FromForm] int belgeTipId,
-            [FromForm] string? aciklama)
+        [RequestSizeLimit(100_000_000)] // 100 MB
+        [Consumes("multipart/form-data")]
+        public async Task<ActionResult<object>> Upload([FromForm] BelgeUploadDto dto)
         {
-            if (dosya == null || dosya.Length == 0)
+            if (dto.Dosya == null || dto.Dosya.Length == 0)
                 return BadRequest("Dosya seçilmedi.");
 
-            if (stajId <= 0 || belgeTipId <= 0)
+            if (dto.StajId <= 0 || dto.BelgeTipId <= 0)
                 return BadRequest("stajId ve belgeTipId zorunludur.");
 
-            // Servisin beklediği: BelgeUploadRequest (stream + orijinal dosya adı + tip & staj)
-            using var stream = dosya.OpenReadStream();
+            using var stream = dto.Dosya.OpenReadStream();
             var req = new BelgeUploadRequest
             {
                 Content = stream,
-                OriginalFileName = dosya.FileName,
-                BelgeTipiID = belgeTipId,
-                StajID = stajId
+                OriginalFileName = dto.Dosya.FileName,
+                BelgeTipiID = dto.BelgeTipId,
+                StajID = dto.StajId
             };
 
-            // Dosyayı kaydeder + meta kaydı yapar, geriye yeni belge ID'si döner
             var newId = await _belgeService.UploadAndSaveAsync(req);
 
-            // İsteğe bağlı: açıklama güncelle (serviste UploadAndSave içinde açıklama set etmiyorsan)
-            if (!string.IsNullOrWhiteSpace(aciklama))
+            if (!string.IsNullOrWhiteSpace(dto.Aciklama))
             {
                 await _belgeService.UpdateAsync(new BelgeUpdateDto
                 {
                     ID = newId,
-                    Açıklama = aciklama.Trim()
+                    Açıklama = dto.Aciklama.Trim()
                 });
             }
 
-            // Cevap
             var created = await _belgeService.GetByIdAsync(newId);
+
             return CreatedAtAction(nameof(Get), new { id = newId }, new
             {
                 id = newId,
@@ -117,28 +111,26 @@ namespace StajTakipUygulaması.Api.Controllers
             });
         }
 
+
         /// <summary>
         /// Var olan belgenin dosyasını yenisiyle değiştirir (yolu günceller).
         /// multipart/form-data: yeniDosya
         /// </summary>
         [HttpPut("{id:int}/file")]
         [RequestSizeLimit(100_000_000)]
-        public async Task<ActionResult<object>> UpdateFile(int id, [FromForm] IFormFile yeniDosya)
+        public async Task<ActionResult<object>> UpdateFile(int id, IFormFile yeniDosya)
         {
             var mevcut = await _belgeService.GetByIdAsync(id);
             if (mevcut is null) return NotFound();
-
             if (yeniDosya == null || yeniDosya.Length == 0)
                 return BadRequest("Dosya boş.");
 
             // 1) Yeni dosyayı kaydet → relativePath al
             using var stream = yeniDosya.OpenReadStream();
-            // BelgeService UploadAndSaveAsync yeni kayıt açıyor; biz sadece dosya yolunu değiştirmek istiyoruz.
-            // Bu nedenle IFileStorage'ı doğrudan burada kullanıyoruz.
             var relativePath = await _storage.SaveAsync(
                 stream,
                 yeniDosya.FileName,
-                subFolder: "Belgeler"           // appsettings: Uploads:BelgeFolder ile eşleşmeli (service’de "Belgeler" default)
+                subFolder: "Belgeler"
             );
 
             // 2) Yolu güncelle

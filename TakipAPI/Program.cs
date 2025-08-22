@@ -26,7 +26,11 @@ builder.Services.AddSingleton<IFileStorage>(sp =>
 builder.Services.AddSingleton<IEmailSender, SmtpEmailSender>();
 
 // API + Swagger
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(x =>
+    {
+        x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -47,19 +51,17 @@ builder.Services.AddCors(opt =>
         .AllowAnyHeader().AllowAnyMethod().AllowCredentials());
 });
 
+
 var app = builder.Build();
 
-// Pipeline
-if (app.Environment.IsDevelopment())
+// Middleware pipeline
+app.UseDeveloperExceptionPage(); // opsiyonel: dev exception page her ortamda açýlýr
+app.UseSwagger();
+app.UseSwaggerUI(c =>
 {
-    app.UseDeveloperExceptionPage();
-    app.UseSwagger();
-    app.UseSwaggerUI(c =>
-    {
-        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Staj Takip API v1");
-        c.RoutePrefix = "swagger";
-    });
-}
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Staj Takip API v1");
+    c.RoutePrefix = "swagger";
+});
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

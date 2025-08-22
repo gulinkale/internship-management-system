@@ -64,11 +64,11 @@ namespace StajTakipUygulaması.Api.Controllers
             [FromForm] string? Yetkiler,
 
             // --- Belgeler (opsiyonel) ---
-            [FromForm] IFormFile? OgrenciBelgesi,
-            [FromForm] IFormFile? Transkript,
-            [FromForm] IFormFile? BasvuruFormu,
-            [FromForm] IFormFile? Taahutname,
-            [FromForm] IFormFile? Referans
+             IFormFile? OgrenciBelgesi,
+             IFormFile? Transkript,
+             IFormFile? BasvuruFormu,
+             IFormFile? Taahutname,
+             IFormFile? Referans
         )
         {
             // 1) Stajyer → StajyerCreateDto ile ekle (service ID döndürür)

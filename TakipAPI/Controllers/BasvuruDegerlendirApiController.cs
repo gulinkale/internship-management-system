@@ -2,7 +2,7 @@ using StajTakipUygulaması.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using StajTakipUygulaması.Application.DTOs;
 
-namespace StajTakipUygulamas.Api.Controllers.v1
+namespace StajTakipUygulaması.Api.Controllers.v1
 {
     [ApiController]
     [Route("api/v1/[controller]")] // => api/v1/basvurular
