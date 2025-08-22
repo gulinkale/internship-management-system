@@ -1,49 +1,132 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+﻿@{
+    Layout = null;
+
+    // aktif sayfaya göre açık kapalı
+    var ctrl = (ViewContext.RouteData.Values["controller"]?.ToString() ?? "").ToLower();
+    var act = (ViewContext.RouteData.Values["action"]?.ToString() ?? "").ToLower();
+
+    bool openOgrenci = ctrl == "pauogrenci" || ctrl == "paudisiogrenci";
+    bool openRapor = ctrl == "rapor";
+    bool openStaj = ctrl == "staj";
+    bool openStajBasvuru = ctrl == "stajyerbasvuru";
+}
+
+<!DOCTYPE html>
+<html lang="tr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Staj_Takip_Uygulaması_Api</title>
+    <title>Staj Takip Uygulaması</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Staj_Takip_Uygulaması_Api.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Staj_Takip_Uygulaması_Api</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <div class="container-fluid">
+        <div class="row min-vh-100">
+
+            <!-- SOL MENÜ -->
+            <div class="text-white d-flex flex-column" style="background-color:#123883;width:250px;min-height:80vh;">
+
+                <h6 class="text-white mb-1 mt-3">Uygulamalarım</h6>
+                <h5 class="text-white mb-4">Staj Takip Uygulaması</h5>
+
+                <!-- Ana Sayfa -->
+                <div class="menu-item mb-2">
+                    <a class="btn w-100 text-start text-white menu-link @(ctrl == "home" ? "active" : "")"
+                       asp-controller="Home" asp-action="Index">Ana Sayfa</a>
                 </div>
+
+                <!-- COLLAPSE GRUPLARI İÇİN ORTAK PARENT -->
+                <div id="sidebarAccordion">
+                    <!-- Yeni Öğrenci Kaydı -->
+                    <div class="menu-item mb-2">
+                        <button class="btn w-100 text-start text-white menu-link @(openOgrenci ? "" : "collapsed")"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#ogrenciMenu"
+                                aria-expanded="@(openOgrenci.ToString().ToLower())"
+                                aria-controls="ogrenciMenu">
+                            Yeni Öğrenci Kaydı
+                        </button>
+                        <div class="collapse ps-3 @(openOgrenci ? "show" : "")" id="ogrenciMenu" data-bs-parent="#sidebarAccordion">
+                            <a class="btn w-100 text-start text-white menu-sub-link mt-1 @(ctrl == "pauogrenci" ? "active" : "")"
+                               asp-controller="PauOgrenci" asp-action="Create">PAÜ Öğrencisi</a>
+                            <a class="btn w-100 text-start text-white menu-sub-link mt-1 @(ctrl == "paudisiogrenci" ? "active" : "")"
+                               asp-controller="PauDisiOgrenci" asp-action="Create">PAÜ Dışı Öğrenci</a>
+                        </div>
+                    </div>
+
+                    <!-- Raporlar -->
+                    <div class="menu-item mb-2">
+                        <button class="btn w-100 text-start text-white menu-link @(openRapor ? "" : "collapsed")"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#raporMenu"
+                                aria-expanded="@(openRapor.ToString().ToLower())"
+                                aria-controls="raporMenu">
+                            Raporlar
+                        </button>
+                        <div class="collapse ps-3 @(openRapor ? "show" : "")" id="raporMenu" data-bs-parent="#sidebarAccordion">
+                            <a class="btn w-100 text-start text-white menu-sub-link mt-1"
+                               asp-controller="Rapor" asp-action="Ara" asp-route-belgeTipId="6">Staj Onay Raporu</a>
+                            <a class="btn w-100 text-start text-white menu-sub-link mt-1"
+                               asp-controller="Rapor" asp-action="Ara" asp-route-belgeTipId="7">Detaylı Staj Durum Raporu</a>
+                            <a class="btn w-100 text-start text-white menu-sub-link mt-1"
+                               asp-controller="Rapor" asp-action="Ara" asp-route-belgeTipId="8">Referans Mektubu</a>
+                        </div>
+                    </div>
+
+                    <!-- Stajyer Listesi -->
+                    <div class="menu-item mb-2">
+                        <button class="btn w-100 text-start text-white menu-link @(openStaj ? "" : "collapsed")"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#stajMenu"
+                                aria-expanded="@(openStaj.ToString().ToLower())"
+                                aria-controls="stajMenu">
+                            Stajyer Listesi
+                        </button>
+                        <div class="collapse ps-3 @(openStaj ? "show" : "")" id="stajMenu" data-bs-parent="#sidebarAccordion">
+                            <a class="btn w-100 text-start text-white menu-sub-link mt-1 @((ctrl == "staj" && act == "aktif") ? "active" : "")"
+                               asp-controller="Staj" asp-action="Aktif">Aktif Stajlar</a>
+                            <a class="btn w-100 text-start text-white menu-sub-link mt-1 @((ctrl == "staj" && (act == "tamamlanmis" || act == "tamamlanmıs")) ? "active" : "")"
+                               asp-controller="Staj" asp-action="Tamamlanmıs">Tamamlanmış Stajlar</a>
+                        </div>
+                    </div>
+
+                    <!-- Stajyer Başvurusu -->
+                    <div class="menu-item mb-2">
+                        <button class="btn w-100 text-start text-white menu-link @(openStajBasvuru ? "" : "collapsed")"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#stajBasvuruMenu"
+                                aria-expanded="@(openStajBasvuru.ToString().ToLower())"
+                                aria-controls="stajBasvuruMenu">
+                            Stajyer Başvurusu
+                        </button>
+                        <div class="collapse ps-3 @(openStajBasvuru ? "show" : "")" id="stajBasvuruMenu" data-bs-parent="#sidebarAccordion">
+                            <a class="btn w-100 text-start text-white menu-sub-link mt-1 @(ctrl == "stajyerbasvuru" ? "active" : "")"
+                               asp-controller="StajyerBasvuru" asp-action="Create">PAÜ Öğrencisi</a>
+                            <a class="btn w-100 text-start text-white menu-sub-link mt-1 @(ctrl == "stajyerbasvuru" ? "active" : "")"
+                               asp-controller="StajyerBasvuru" asp-action="Create">PAÜ Dışı Öğrenci</a>
+                        </div>
+                    </div>
+                </div><!-- /#sidebarAccordion -->
+                <!-- Başvurular -->
+                <div class="menu-item mb-2">
+                    <a class="btn w-100 text-start text-white menu-link @(ctrl == "basvurudegerlendir" ? "active" : "")"
+                       asp-controller="BasvuruDegerlendir" asp-action="Index">Başvurular</a>
+                </div>
+
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+
+            <!-- SAĞ İÇERİK -->
+            <div class="col bg-light p-4">
+                @RenderBody()
+            </div>
+
+        </div>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - Staj_Takip_Uygulaması_Api - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

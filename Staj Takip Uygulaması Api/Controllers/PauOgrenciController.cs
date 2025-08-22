@@ -1,53 +1,87 @@
+// Proje: StajTakipUygulamasi.Web (UI)
+// Dosya: Controllers/PauOgrenciController.cs
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using StajTakipUygulaması.Application.Interfaces;
-using StajTakipUygulaması.Data;
-using StajTakipUygulaması.Domain.Entities;
-using StajTakipUygulaması.Models;
+using System.Net.Http.Headers;
+using System.Net.Http.Json;
+using StajTakipUygulaması.Models;                 // OgrenciViewModel
+using StajTakipUygulaması.Domain.Entities;        // Staj, Stajyer (viewmodel içi)
+using StajTakipUygulaması.Application.DTOs;       // StajyerCreateDto, StajyerDto vb.
 
 namespace StajTakipUygulamas.Ui.Controllers
 {
     [Route("[controller]/[action]")]
     public class PauOgrenciController : Controller
     {
-        private readonly IStajyerService _stajyerService;
-        private readonly StajContext _context;
+        private readonly HttpClient _http;
 
-        public PauOgrenciController(IStajyerService stajyerService, StajContext context)
+        // API endpoint sabitleri (gerekirse değiştir)
+        private const string EP_STAJ_TURU = "api/stajturu";
+        private const string EP_STAJYER = "api/stajyer";
+        private const string EP_STAJ = "api/staj";
+        private const string EP_BELGE = "api/belge/upload";
+
+        public PauOgrenciController(IHttpClientFactory f)
         {
-            _stajyerService = stajyerService;
-            _context = context;
+            _http = f.CreateClient("Api");
         }
 
-        // LISTE
+        // ======= LISTE (API) =======
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var stajyerler = await _stajyerService.GetAllAsync();
-            return View(stajyerler); // Views/PauOgrenci/Index.cshtml -> @model IReadOnlyList<StajyerDto>
+            var list = await _http.GetFromJsonAsync<IReadOnlyList<StajyerDto>>(EP_STAJYER);
+            return View(list ?? new List<StajyerDto>());
         }
 
-        // DETAY
+        // ======= DETAY (API) =======
         [HttpGet("{id:int}")]
         public async Task<IActionResult> Details(int id)
         {
-            var stajyer = await _stajyerService.GetByIdAsync(id);
-            return stajyer is null ? NotFound() : View(stajyer); // Views/PauOgrenci/Details.cshtml -> @model StajyerDto
+            var resp = await _http.GetAsync($"{EP_STAJYER}/{id}");
+            if (!resp.IsSuccessStatusCode) return NotFound();
+            var dto = await resp.Content.ReadFromJsonAsync<StajyerDto>();
+            return View(dto);
         }
 
-        // OLUSTUR (GET)
-        [HttpGet]
-        public IActionResult Create()
+        // ======= HELPER: Staj türleri doldur =======
+        private async Task LoadStajTurleriAsync()
         {
-            ViewBag.StajTurleri = _context.StajTurleri
-                .Select(st => new SelectListItem { Value = st.ID.ToString(), Text = st.Ad })
-                .ToList();
+            try
+            {
+                var resp = await _http.GetAsync(EP_STAJ_TURU);
+                if (!resp.IsSuccessStatusCode)
+                {
+                    ViewBag.StajTurleri = new List<SelectListItem>();
+                    ModelState.AddModelError("", "Staj türleri yüklenemedi.");
+                    return;
+                }
 
-            if (TempData["Mesaj"] != null) ViewBag.Mesaj = TempData["Mesaj"];
-            return View(new OgrenciViewModel()); // Views/PauOgrenci/Create.cshtml -> @model OgrenciViewModel
+                var turler = await resp.Content.ReadFromJsonAsync<List<StajTuruDto>>()
+                             ?? new List<StajTuruDto>();
+
+                ViewBag.StajTurleri = turler
+                    .Select(st => new SelectListItem { Value = st.Id.ToString(), Text = st.Ad })
+                    .ToList();
+            }
+            catch (Exception ex)
+            {
+                ViewBag.StajTurleri = new List<SelectListItem>();
+                ModelState.AddModelError("", "Staj türleri alınırken hata: " + ex.Message);
+            }
         }
 
-        // OLUSTUR (POST)
+        // ======= CREATE (GET) =======
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            await LoadStajTurleriAsync();
+            if (TempData["Mesaj"] != null) ViewBag.Mesaj = TempData["Mesaj"];
+            return View(new OgrenciViewModel());
+        }
+
+        // ======= CREATE (POST) – TAMAMI API =======
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(OgrenciViewModel model)
@@ -57,24 +91,20 @@ namespace StajTakipUygulamas.Ui.Controllers
 
             if (!ModelState.IsValid)
             {
-                ViewBag.StajTurleri = _context.StajTurleri
-                    .Select(st => new SelectListItem { Value = st.ID.ToString(), Text = st.Ad })
-                    .ToList();
+                await LoadStajTurleriAsync();
                 return View(model);
             }
 
-            // 1) Stajyer
-            _context.Stajyerler.Add(model.Stajyer);
-            await _stajyerService.AddAsync(new StajTakipUygulaması.Application.DTOs.StajyerCreateDto
+            // 1) Stajyer (PAÜ içi) → API
+            var stajyerCreate = new StajyerCreateDto
             {
-                // Eğer DTO’nun alanları entity’den farklıysa burada map et
                 Universite = model.Stajyer.Universite,
                 OgrenciNo = model.Stajyer.OgrenciNo,
                 Bolum = model.Stajyer.Bolum,
                 Fakulte = model.Stajyer.Fakulte,
                 BaslamaYili = model.Stajyer.BaslamaYili,
                 Sinif = model.Stajyer.Sinif,
-                PAU_ogrencisi_mi = model.Stajyer.PAU_ogrencisi_mi,
+                PAU_ogrencisi_mi = true,                 // ⬅️ PAÜ içi
                 Ad = model.Stajyer.Ad,
                 Soyad = model.Stajyer.Soyad,
                 TCKimlikNo = model.Stajyer.TCKimlikNo,
@@ -83,44 +113,95 @@ namespace StajTakipUygulamas.Ui.Controllers
                 TelNo = model.Stajyer.TelNo,
                 Email = model.Stajyer.Email,
                 Adres = model.Stajyer.Adres
-            });
+            };
 
-            // 2) Staj
-            model.Staj.StajyerID = model.Stajyer.ID;
-            _context.Stajlar.Add(model.Staj);
-            await _context.SaveChangesAsync();
-
-            // 3) Belgeler (varsa)
-            var belgeler = new List<IFormFile?> { model.OgrenciBelgesi, model.Transkript, model.BasvuruFormu, model.Taahutname, model.Referans };
-            string[] belgeAdlari = { "Öğrenci Belgesi", "Transkript", "Başvuru Formu", "Taahhütname", "Referans Mektubu" };
-
-            for (int i = 0; i < belgeler.Count; i++)
+            var stajyerResp = await _http.PostAsJsonAsync(EP_STAJYER, stajyerCreate);
+            if (!stajyerResp.IsSuccessStatusCode)
             {
-                var file = belgeler[i];
-                if (file == null) continue;
-
-                var uploadsFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "belgeler");
-                Directory.CreateDirectory(uploadsFolder);
-
-                var uniqueName = $"{Guid.NewGuid()}_{file.FileName}";
-                var filePath = Path.Combine(uploadsFolder, uniqueName);
-
-                using (var stream = new FileStream(filePath, FileMode.Create))
-                    await file.CopyToAsync(stream);
-
-                _context.Belgeler.Add(new Belge
-                {
-                    BelgeAdı = belgeAdlari[i],
-                    Yolu = "/belgeler/" + uniqueName,
-                    Açıklama = "",
-                    StajID = model.Staj.ID,
-                    BelgeTipiID = i + 1
-                });
+                await LoadStajTurleriAsync();
+                ModelState.AddModelError("", "Öğrenci (stajyer) kaydı başarısız.");
+                return View(model);
             }
 
-            await _context.SaveChangesAsync();
-            TempData["Mesaj"] = "✅ Öğrenci başarıyla kaydedildi.";
-            return RedirectToAction(nameof(Create));
+            var stajyer = await stajyerResp.Content.ReadFromJsonAsync<StajyerDto>();
+            if (stajyer is null)
+            {
+                await LoadStajTurleriAsync();
+                ModelState.AddModelError("", "Öğrenci (stajyer) yanıtı okunamadı.");
+                return View(model);
+            }
+
+            // 2) Staj → API
+            var stajCreate = new StajCreateDto
+            {
+                StajyerID = stajyer.ID,
+                StajTuruID = model.Staj.StajTuruID,
+                BaslamaTarihi = model.Staj.BaslamaTarihi,
+                BitisTarihi = model.Staj.BitisTarihi,
+                Departman = model.Staj.Departman,
+                SorumluID = model.Staj.SorumluID,
+                Yetkiler = model.Staj.Yetkiler
+            };
+
+            var stajResp = await _http.PostAsJsonAsync(EP_STAJ, stajCreate);
+            if (!stajResp.IsSuccessStatusCode)
+            {
+                await LoadStajTurleriAsync();
+                ModelState.AddModelError("", "Staj kaydı başarısız.");
+                return View(model);
+            }
+
+            var stajObj = await stajResp.Content.ReadFromJsonAsync<StajDto>();
+            if (stajObj is null)
+            {
+                await LoadStajTurleriAsync();
+                ModelState.AddModelError("", "Staj yanıtı okunamadı.");
+                return View(model);
+            }
+
+            // 3) Belgeler → API (varsa)
+            var belgeler = new List<(IFormFile? file, string ad, int belgeTipId)>
+            {
+                (model.OgrenciBelgesi, "Öğrenci Belgesi", 1),
+                (model.Transkript,     "Transkript",       2),
+                (model.BasvuruFormu,   "Başvuru Formu",    3),
+                (model.Taahutname,     "Taahhütname",      4),
+                (model.Referans,       "Referans Mektubu", 5)
+            };
+
+            foreach (var (file, ad, belgeTipiId) in belgeler)
+            {
+                if (file is null || file.Length == 0) continue;
+
+                await using var stream = file.OpenReadStream();
+                using var content = new MultipartFormDataContent();
+                using var fileContent = new StreamContent(stream);
+
+                fileContent.Headers.ContentType =
+                    new MediaTypeHeaderValue(file.ContentType ?? "application/octet-stream");
+
+                content.Add(fileContent, "dosya", file.FileName);
+                content.Add(new StringContent(stajObj.Id.ToString()), "stajId");
+                content.Add(new StringContent(belgeTipiId.ToString()), "belgeTipId");
+                content.Add(new StringContent(ad), "aciklama");
+
+                var uploadResp = await _http.PostAsync(EP_BELGE, content);
+                if (!uploadResp.IsSuccessStatusCode)
+                {
+                    ModelState.AddModelError("", $"Belge yükleme başarısız: {ad}");
+                    // Devam etmek istiyorsan kesmeden ilerle (continue).
+                }
+            }
+
+            TempData["Mesaj"] = "✅ PAÜ öğrencisi başarıyla kaydedildi.";
+            // Temiz sayfa için:
+            ModelState.Clear();
+            await LoadStajTurleriAsync();
+            return View(new OgrenciViewModel());
         }
     }
+
+    // ---- Basit DTO'lar (sende yoksa ekleyebilirsin) ----
+    public sealed class StajTuruDto { public int Id { get; set; } public string Ad { get; set; } = ""; }
+    public sealed class StajDto { public int Id { get; set; } }
 }

@@ -23,6 +23,17 @@ builder.Services.AddSingleton<IFileStorage>(sp =>
 });
 builder.Services.AddSingleton<IEmailSender, SmtpEmailSender>();
 
+
+// IHttpClientFactory kaydý
+builder.Services.AddHttpClient("Api", client =>
+{
+    var baseUrl = builder.Configuration["Api:BaseUrl"]
+                  ?? throw new InvalidOperationException("Api:BaseUrl missing");
+    client.BaseAddress = new Uri(baseUrl);
+});
+
+
+
 // MVC
 builder.Services.AddControllersWithViews();
 

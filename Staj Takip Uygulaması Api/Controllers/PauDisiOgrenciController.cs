@@ -13,6 +13,7 @@ namespace StajTakipUygulamasi.Web.Controllers
     public class PauDisiOgrenciController : Controller
     {
         private readonly HttpClient _http;
+
         public PauDisiOgrenciController(IHttpClientFactory f) => _http = f.CreateClient("Api");
 
         // 🔍 Detay (UI sadece API'den çeker)

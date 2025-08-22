@@ -1,9 +1,9 @@
-using Microsoft.AspNetCore.Http.Features;
+ï»¿using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
-using StajTakipUygulamasý.Application.Interfaces;
-using StajTakipUygulamasý.Data;                 // StajContext
-using StajTakipUygulamasý.Infrastructure.Services;
+using StajTakipUygulamasÄ±.Application.Interfaces;
+using StajTakipUygulamasÄ±.Data;
+using StajTakipUygulamasÄ±.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -26,11 +26,11 @@ builder.Services.AddSingleton<IFileStorage>(sp =>
 builder.Services.AddSingleton<IEmailSender, SmtpEmailSender>();
 
 // API + Swagger
-builder.Services.AddControllers()
-    .AddJsonOptions(x =>
-    {
-        x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
-    });
+builder.Services.AddControllers().AddJsonOptions(x =>
+{
+    x.JsonSerializerOptions.ReferenceHandler =
+        System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+});
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -43,31 +43,43 @@ builder.Services.Configure<FormOptions>(o =>
     o.MultipartBodyLengthLimit = 200L * 1024L * 1024L;
 });
 
+// ðŸ”´ CORS: SADECE BÄ°R KEZ TANIMLA
 const string CorsPolicy = "AllowWeb";
 builder.Services.AddCors(opt =>
 {
     opt.AddPolicy(CorsPolicy, p => p
-        .WithOrigins("http://localhost:5173", "http://localhost:3000", "http://localhost:4200")
-        .AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+        .WithOrigins(
+            "https://localhost:7137", // UI (MVC)
+            "http://localhost:5173",
+            "http://localhost:3000",
+            "http://localhost:4200")
+        .AllowAnyHeader()
+        .AllowAnyMethod()
+        .AllowCredentials());
 });
-
 
 var app = builder.Build();
 
-// Middleware pipeline
-app.UseDeveloperExceptionPage(); // opsiyonel: dev exception page her ortamda açýlýr
-app.UseSwagger();
-app.UseSwaggerUI(c =>
+// Middleware pipeline (sÄ±ra Ã¶nemli)
+if (app.Environment.IsDevelopment())
 {
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Staj Takip API v1");
-    c.RoutePrefix = "swagger";
-});
+    app.UseDeveloperExceptionPage();
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "Staj Takip API v1");
+        c.RoutePrefix = "swagger";
+    });
+}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
+
 app.UseCors(CorsPolicy);
+
 // app.UseAuthentication();
-// app.UseAuthorization();
+app.UseAuthorization();
+
 app.MapControllers();
 app.Run();
