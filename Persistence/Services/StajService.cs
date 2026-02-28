@@ -2,10 +2,6 @@
 using StajTakipUygulaması.Application.Interfaces;
 using StajTakipUygulaması.Data;
 using StajTakipUygulaması.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace StajTakipUygulaması.Infrastructure.Services
 {
@@ -24,6 +20,12 @@ namespace StajTakipUygulaması.Infrastructure.Services
                 .ToListAsync();
         }
 
+        public async Task<List<StajTuru>> GetStajTurleriAsync()
+        {
+            return await _context.StajTurleri.ToListAsync();
+        }
+
+
         public async Task<Staj?> GetByIdAsync(int id)
         {
             return await _context.Stajlar
@@ -41,7 +43,6 @@ namespace StajTakipUygulaması.Infrastructure.Services
 
         public async Task UpdateAsync(Staj staj)
         {
-            // İstersen sadece gelen alanları güncelleyecek şekilde genişletebilirsin
             _context.Stajlar.Update(staj);
             await _context.SaveChangesAsync();
         }

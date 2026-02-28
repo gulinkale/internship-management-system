@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using StajTakipUygulamasý.Application.Interfaces;
-using StajTakipUygulamasý.Data;
-using StajTakipUygulamasý.Infrastructure.Services;
+using StajTakipUygulamasÄ±.Application.Interfaces;
+using StajTakipUygulamasÄ±.Data;
+using StajTakipUygulamasÄ±.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,7 +24,7 @@ builder.Services.AddSingleton<IFileStorage>(sp =>
 builder.Services.AddSingleton<IEmailSender, SmtpEmailSender>();
 
 
-// IHttpClientFactory kaydý
+// IHttpClientFactory kaydï¿½
 builder.Services.AddHttpClient("Api", client =>
 {
     var baseUrl = builder.Configuration["Api:BaseUrl"]

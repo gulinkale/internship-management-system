@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.OpenApi.Models;
 using StajTakipUygulaması.Application.Interfaces;
 using StajTakipUygulaması.Data;
@@ -7,11 +8,11 @@ using StajTakipUygulaması.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// DB
+// ----------------- DB -----------------
 var cs = builder.Configuration.GetConnectionString("DefaultConnection");
 builder.Services.AddDbContext<StajContext>(opt => opt.UseSqlServer(cs));
 
-// DI
+// ----------------- DI -----------------
 builder.Services.AddScoped<IStajyerService, StajyerService>();
 builder.Services.AddScoped<IStajService, StajService>();
 builder.Services.AddScoped<IBelgeService, BelgeService>();
@@ -25,7 +26,7 @@ builder.Services.AddSingleton<IFileStorage>(sp =>
 });
 builder.Services.AddSingleton<IEmailSender, SmtpEmailSender>();
 
-// API + Swagger
+// ----------------- API + Swagger -----------------
 builder.Services.AddControllers().AddJsonOptions(x =>
 {
     x.JsonSerializerOptions.ReferenceHandler =
@@ -37,13 +38,13 @@ builder.Services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Staj Takip API", Version = "v1" });
 });
 
-// Upload limit (opsiyonel)
+// ----------------- Upload limit -----------------
 builder.Services.Configure<FormOptions>(o =>
 {
-    o.MultipartBodyLengthLimit = 200L * 1024L * 1024L;
+    o.MultipartBodyLengthLimit = 200L * 1024L * 1024L; // 200 MB
 });
 
-// 🔴 CORS: SADECE BİR KEZ TANIMLA
+// ----------------- CORS -----------------
 const string CorsPolicy = "AllowWeb";
 builder.Services.AddCors(opt =>
 {
@@ -60,7 +61,7 @@ builder.Services.AddCors(opt =>
 
 var app = builder.Build();
 
-// Middleware pipeline (sıra önemli)
+// ----------------- Middleware pipeline -----------------
 if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
@@ -73,13 +74,24 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseStaticFiles();
-app.UseRouting();
 
+// wwwroot (css/js/img için)
+app.UseStaticFiles();
+
+// Belgeler klasörü için özel static file
+app.UseStaticFiles(new StaticFileOptions
+{
+    RequestPath = "/Belgeler",
+    FileProvider = new PhysicalFileProvider(
+        Path.Combine(builder.Environment.WebRootPath, "Belgeler"))
+});
+
+app.UseRouting();
 app.UseCors(CorsPolicy);
 
 // app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
 app.Run();

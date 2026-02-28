@@ -17,8 +17,8 @@ namespace StajTakipUygulamas.Ui.Controllers
         private readonly HttpClient _http;
 
         // API endpoint sabitleri (gerekirse değiştir)
-        private const string EP_STAJ_TURU = "api/stajturu";
-        private const string EP_STAJYER = "api/stajyer";
+        private const string EP_STAJ_TURU = "api/StajTurleri";
+        private const string EP_STAJYER = "api/v1/stajyerler";
         private const string EP_STAJ = "api/staj";
         private const string EP_BELGE = "api/belge/upload";
 

@@ -64,9 +64,12 @@ namespace StajTakipUygulaması.Web.Controllers
 
             // Belge tipleri (dropdown vb.)
             var tipResp = await _http.GetAsync("api/belgetipi");
-            var tipler = tipResp.IsSuccessStatusCode
-                ? await tipResp.Content.ReadFromJsonAsync<List<dynamic>>() : new List<dynamic>();
+            List<BelgeTipi> tipler = tipResp.IsSuccessStatusCode
+                ? await tipResp.Content.ReadFromJsonAsync<List<BelgeTipi>>()
+                : new List<BelgeTipi>();
+
             ViewBag.BelgeTipleri = tipler;
+
 
             // Eski view yolunu koruyalım:
             return View("~/Views/Staj/StajyerListesi/StajyerBilgileri.cshtml", staj!);

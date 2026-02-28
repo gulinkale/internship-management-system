@@ -4,13 +4,20 @@ using StajTakipUygulaması.Application.Interfaces;
 using StajTakipUygulaması.Data;
 using StajTakipUygulaması.Domain.Entities;
 using StajTakipUygulaması.Models;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace StajTakipUygulaması.Infrastructure.Services
 {
     public class StajyerService : IStajyerService
     {
         private readonly StajContext _context;
-        public StajyerService(StajContext context) => _context = context;
+
+        public StajyerService(StajContext context)
+        {
+            _context = context;
+        }
 
         public async Task<IReadOnlyList<StajyerDto>> GetAllAsync()
         {
@@ -25,7 +32,6 @@ namespace StajTakipUygulaması.Infrastructure.Services
                     BaslamaYili = x.BaslamaYili,
                     Sinif = x.Sinif,
                     PAU_ogrencisi_mi = x.PAU_ogrencisi_mi,
-
                     Ad = x.Ad,
                     Soyad = x.Soyad,
                     TCKimlikNo = x.TCKimlikNo,
@@ -52,7 +58,6 @@ namespace StajTakipUygulaması.Infrastructure.Services
                     BaslamaYili = x.BaslamaYili,
                     Sinif = x.Sinif,
                     PAU_ogrencisi_mi = x.PAU_ogrencisi_mi,
-
                     Ad = x.Ad,
                     Soyad = x.Soyad,
                     TCKimlikNo = x.TCKimlikNo,
@@ -76,7 +81,6 @@ namespace StajTakipUygulaması.Infrastructure.Services
                 BaslamaYili = dto.BaslamaYili,
                 Sinif = dto.Sinif,
                 PAU_ogrencisi_mi = dto.PAU_ogrencisi_mi,
-
                 Ad = dto.Ad,
                 Soyad = dto.Soyad,
                 TCKimlikNo = dto.TCKimlikNo,
@@ -97,7 +101,6 @@ namespace StajTakipUygulaması.Infrastructure.Services
             var ent = await _context.Stajyerler.FirstOrDefaultAsync(x => x.ID == dto.ID);
             if (ent is null) throw new KeyNotFoundException("Stajyer bulunamadı.");
 
-            // Sadece gönderilen alanları güncelle
             if (dto.Universite != null) ent.Universite = dto.Universite;
             if (dto.OgrenciNo != null) ent.OgrenciNo = dto.OgrenciNo;
             if (dto.Bolum != null) ent.Bolum = dto.Bolum;
@@ -105,7 +108,6 @@ namespace StajTakipUygulaması.Infrastructure.Services
             if (dto.BaslamaYili.HasValue) ent.BaslamaYili = dto.BaslamaYili.Value;
             if (dto.Sinif != null) ent.Sinif = dto.Sinif;
             if (dto.PAU_ogrencisi_mi.HasValue) ent.PAU_ogrencisi_mi = dto.PAU_ogrencisi_mi.Value;
-
             if (dto.Ad != null) ent.Ad = dto.Ad;
             if (dto.Soyad != null) ent.Soyad = dto.Soyad;
             if (dto.TCKimlikNo != null) ent.TCKimlikNo = dto.TCKimlikNo;
@@ -125,6 +127,12 @@ namespace StajTakipUygulaması.Infrastructure.Services
 
             _context.Stajyerler.Remove(ent);
             await _context.SaveChangesAsync();
+        }
+
+        // ✅ Eksik olan metot eklendi:
+        public async Task<List<StajTuru>> GetStajTurleriAsync()
+        {
+            return await _context.StajTurleri.ToListAsync();
         }
     }
 }

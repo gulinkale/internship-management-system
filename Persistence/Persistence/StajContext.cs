@@ -20,14 +20,14 @@ namespace StajTakipUygulaması.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // 🔗 Basvuru ↔️ BasvuruBelge ilişkisi
+            //  Basvuru - BasvuruBelge ilişkisi
             modelBuilder.Entity<BasvuruBelge>()
                 .HasOne(bb => bb.Basvuru)
                 .WithMany(b => b.BasvuruBelgeleri)
                 .HasForeignKey(bb => bb.BasvuruID)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            // 📌 Belge Tipleri başlangıç verisi
+            // Belge Tipleri başlangıç verisi
             modelBuilder.Entity<BelgeTipi>().HasData(
                 new BelgeTipi { ID = 1, Ad = "Öğrenci Belgesi" },
                 new BelgeTipi { ID = 2, Ad = "Transkript" },
@@ -39,7 +39,7 @@ namespace StajTakipUygulaması.Data
                 new BelgeTipi { ID = 8, Ad = "Verilen_Referans Mektubu" }
             );
 
-            // 📌 Staj Türleri başlangıç verisi
+            // Staj Türleri başlangıç verisi
             modelBuilder.Entity<StajTuru>().HasData(
                 new StajTuru { ID = 1, Ad = "Zorunlu" },
                 new StajTuru { ID = 2, Ad = "İŞKUR" },

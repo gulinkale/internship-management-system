@@ -1,4 +1,5 @@
 ﻿using StajTakipUygulaması.Application.DTOs;
+using StajTakipUygulaması.Domain.Entities;
 
 namespace StajTakipUygulaması.Application.Interfaces
 {
@@ -9,6 +10,8 @@ namespace StajTakipUygulaması.Application.Interfaces
         Task<int> AddAsync(StajyerCreateDto dto);
         Task UpdateAsync(StajyerUpdateDto dto);
         Task DeleteAsync(int id);
+        Task<List<StajTuru>> GetStajTurleriAsync();
+
     }
 }
 

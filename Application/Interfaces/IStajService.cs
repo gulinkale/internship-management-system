@@ -14,5 +14,7 @@ namespace StajTakipUygulaması.Application.Interfaces
         Task<List<Staj>> GetAktifStajlarAsync();
         Task<List<Staj>> GetTamamlanmisStajlarAsync();
 
+        Task<List<StajTuru>> GetStajTurleriAsync();
+
     }
 }

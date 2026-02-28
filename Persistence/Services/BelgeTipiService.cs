@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using StajTakipUygulaması.Domain.Entities;
-using StajTakipUygulaması.Application.DTOs;
 using StajTakipUygulaması.Application.Interfaces;
 using StajTakipUygulaması.Data;
 
@@ -10,19 +9,15 @@ namespace StajTakipUygulaması.Infrastructure.Services
     {
         private readonly StajContext _context;
 
-        public BelgeTipiService(StajContext context) => _context = context;
-
-        public async Task<IReadOnlyList<BelgeTipiDto>> GetAllAsync()
+        public BelgeTipiService(StajContext context)
         {
-            return await _context.BelgeTipleri
-                .Select(x => new BelgeTipiDto { Id = x.ID, Ad = x.Ad })
-                .ToListAsync();
+            _context = context;
         }
 
-        Task<List<BelgeTipi>> IBelgeTipiService.GetAllAsync()
+        // Tüm belge tiplerini veritabanından getirir
+        public async Task<List<BelgeTipi>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _context.BelgeTipleri.ToListAsync();
         }
     }
 }
-
